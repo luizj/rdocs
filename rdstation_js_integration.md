@@ -21,7 +21,7 @@ Uma vez atendida a especificação acima, para realizar a integração você dev
 3 - Adicionar o código na página que contém o formulário.
 
 ```HTML
-<script type ='text/javascript' src="https://s3-sa-east-1.amazonaws.com/rdstation-assets-staging/js-integration/0.1.0/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
     RDStationFormIntegration('SEU_TOKEN_RDSTATION_AQUI', 'IDENTIFICADOR DESEJADO');
 </script>
@@ -116,7 +116,7 @@ html,body{text-align:center;}
     </div>
   </form> 
 </div>
-<script type ='text/javascript' src="https://s3-sa-east-1.amazonaws.com/rdstation-assets-staging/js-integration/0.1.0/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
     RDStationFormIntegration('f1c940384a971f2982c61a5e5f11e6b9', 'Formulário de contato');
 </script>
