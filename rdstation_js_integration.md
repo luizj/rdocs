@@ -19,8 +19,11 @@ Todo formulário a ser integrado deve ter um input com o nome <strong>email</str
 ### Integrando seus formulários
 
 Uma vez atendida a especificação acima, para realizar a integração você deve inserir o script abaixo na página que contém o formulário, seguindo esses passos:
+
 1 - Inserir seu token RD Station onde diz `'SEU_TOKEN_RDSTATION_AQUI'`. Ele pode ser obtido nas suas [Configurações do RD Station](https://www.rdstation.com.br/integracoes);
+
 2 - Definir um identificador para o evento de conversão e inserí-lo no script abaixo onde diz `'IDENTIFICADOR DESEJADO'`;
+
 3 - Adicionar o código na página que contém o formulário.
 
 ```HTML
