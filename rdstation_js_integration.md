@@ -6,7 +6,7 @@ Essa é a integração mais simples de ser feita. Basta apenas adicionar um scri
 Os seus formulários irão para o RD Station com um identificador. Identificador é o nome do evento, por exemplo, cadastro, newsletter, formulário de orçamento, contato, entre outros, que irá aparecer na conversão do Lead no seu RD Station.
 
 
-### Requisitos
+### Requisito (presença campo email)
 
 Existe uma característica necessária e muito importante para a integração funcionar (talvez você precise editá-la ou adicioná-a na sua página)
 
@@ -16,7 +16,7 @@ Todo formulário a ser integrado deve ter um input com o nome <strong>email</str
 <input type="text" name="email" />
 ```
 
-### Integrando seus formulários
+### Integrando os seus formulários
 
 Uma vez atendida a especificação acima, para realizar a integração você deve inserir o script abaixo na página que contém o formulário, seguindo esses passos:
 
@@ -37,8 +37,6 @@ Após esses passos, recomendamos sempre testar a integração para verificar se 
 
 
 ### Outros campos e informações do formulário
-
-Dos dados do usuário, a informação de e-mail (<strong>email</strong> ou <strong>email_lead</strong>) é <u><strong>obrigatória</strong></u>. Se não estiver presente, o formulário não será integrado.
 
 Diversos outros campos podem ser utilizados para um chaveamento automático com o RD Station. Estes campos irão aparecer diretamente na tela de informação de Lead se mantiverem o mesmo nome.
 
@@ -61,23 +59,12 @@ Ps.: Recomenda-se que o campo de nome tenha name="name", pois assim esse será o
 
 ### Avisos de conversão por email
 
-O RD Station pode lhe enviar um email quando uma nova conversão for realizada em seu site. Para isso, basta colocar o seu email na configuração da página da API https://www.rdstation.com.br/docs/api
-
-### Erros
-
-A API pode retornar erro caso:
- - (401) seu token RD Station esteja errado ou inválido;
- - (400) não esteja recebendo um identificador;
- - (400) não esteja recebendo a informação <strong>email</strong> ou <strong>email_lead</strong> do formulário;
-
-É importante testar a integração após as modificações para evitar que erros comos esses acima apareçam para o seu visitante.
-
-Também é interessante usar alguma validação dos campos pedidos para evitar o não preenchimento do campo de email, mas para isso será preciso algum controle Javascript ou de alguma outra linguagem.
+O RD Station pode lhe enviar um email quando uma nova conversão for realizada em seu site. Para isso, basta colocar o seu email na configuração da página da API https://www.rdstation.com.br/integracoes
 
 
-### Exemplos completos
+### Exemplo completo
 
-No código HTML abaixo, é possível ver uma página com um formulário simples que envia as informações para a API e depois redireciona o visitante para outra página.
+No código HTML abaixo, é possível ver uma página com um formulário que envia as informações para a API e depois redireciona o visitante para outra página.
 
 ```HTML
 <!DOCTYPE html>
@@ -125,8 +112,20 @@ html,body{text-align:center;}
 </script>
     <!--
       * Atenção!
-      * Token de testes - Usar o próprio de sua conta encontrado em: https://www.rdstation.com.br/docs/api
+      * Token de testes - Usar o próprio de sua conta encontrado em: https://www.rdstation.com.br/integracoes
     -->
 </body>
 </html>
 ```
+
+
+### Possíveis Erros
+
+A API pode retornar erro caso:
+ - (401) seu token RD Station esteja errado ou inválido;
+ - (400) não esteja recebendo um identificador;
+ - (400) não esteja recebendo o email (<strong>email</strong> ou <strong>email_lead</strong>) vindo do formulário;
+
+É importante testar a integração após as modificações para evitar que erros comos esses acima apareçam para o seu visitante.
+
+Também é interessante usar alguma validação dos campos pedidos para evitar o não preenchimento do campo de email.
