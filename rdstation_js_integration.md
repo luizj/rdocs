@@ -45,10 +45,15 @@ Vale ressaltar que somente serão integrados os formulários que tiverem um inpu
 
 Dos dados do usuário, a informação de e-mail (<strong>email</strong> ou <strong>email_lead</strong>) é <u><strong>obrigatória</strong></u>. Se não estiver presente, o formulário não será integrado.
 
-Diversos outros campos podem ser utilizados para um chaveamento automático com a ferramenta inteligente de CRM. 
-Segue uma lista:
-<ul><li>nome</li><li>telefone</li><li>empresa</li><li>cargo</li><li>twitter</li></ul>
-Eles não são obrigatórios e você não precisa inserí-los na sua página se não desejar. Mas se já usar algum parecido, pode ajustar o nome dele conforme a lista acima para uma melhor integração.
+Diversos outros campos podem ser utilizados para um chaveamento automático com o RD Station. Estes campos irão aparecer diretamente na tela de informação de Lead se mantiverem o mesmo nome.
+
+<ul>
+<li>nome</li>
+<li>telefone</li>
+<li>empresa</li>
+<li>cargo</li>
+<li>twitter</li>
+</ul>
 
 Todas as informações que você deseja enviar ao RD Station deve estar em um <em>input</em> com uma tag <strong>name</strong>. Essas informações ficarão disponíveis nos detalhes da conversão do lead.
 ```HTML
