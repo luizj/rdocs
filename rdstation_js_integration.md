@@ -36,14 +36,6 @@ Uma vez atendida a especificação acima, para realizar a integração você dev
 Após esses passos, recomendamos sempre testar a integração para verificar se todos dados aparecem no RD Station.
 
 
-### Integrar todos os formulários com o mesmo identificador
-
-Se você tem diversos formulários no seu site e gostaria de integrar todos com o mesmo identificador, você precisa ter um item que esteja presente em todas as páginas. Esse item pode ser, por exemplo, um `footer.php`.
-
-Para realizar essa integração, pode seguir os dois primeiros passos normalmente, e inserir o código nessa "página onipresente", em vez de inserí-lo em cada página que contém um formulário.
-
-Vale ressaltar que somente serão integrados os formulários que tiverem um input com o nome <strong>email</strong> ou <strong>email_lead</strong>.
-
 ### Outros campos e informações do formulário
 
 Dos dados do usuário, a informação de e-mail (<strong>email</strong> ou <strong>email_lead</strong>) é <u><strong>obrigatória</strong></u>. Se não estiver presente, o formulário não será integrado.
