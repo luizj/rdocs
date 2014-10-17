@@ -1,9 +1,12 @@
 # Integrações RD Station
 ## Integração Genérica via JavaScript 
 
-Essa é a integração mais simples de ser feita. Ela pode integrar todos os seus formulários com apenas um identificador ou integrar cada formulário com um identificador diferente. Identificador é o nome do evento que aparecerá na conversão do lead no seu RD Station.
+Essa é a integração mais simples de ser feita. Basta apenas adicionar um script padrão diretamente na página do seu formulário, assim como o Google Analytics.
 
-### Usando a API
+Os seus formulários irão para o RD Station com um identificador. Identificador é o nome do evento, por exemplo, cadastro, newsletter, formulário de orçamento, contato, entre outros, que irá aparecer na conversão do Lead no seu RD Station.
+
+
+### Requisitos
 
 Existe uma característica necessária e muito importante para a integração funcionar (talvez você precise editá-la ou adicioná-a na sua página)
 
@@ -16,7 +19,7 @@ Todo formulário a ser integrado deve ter um input com o nome <strong>email</str
 ### Integrando seus formulários
 
 Uma vez atendida a especificação acima, para realizar a integração você deve inserir o script abaixo na página que contém o formulário, seguindo esses passos:
-1 - Inserir seu token RD Station onde diz `'SEU_TOKEN_RDSTATION_AQUI'`. Ele pode ser obtido nas suas [Configurações do RD Station](https://www.rdstation.com.br/docs/api);
+1 - Inserir seu token RD Station onde diz `'SEU_TOKEN_RDSTATION_AQUI'`. Ele pode ser obtido nas suas [Configurações do RD Station](https://www.rdstation.com.br/integracoes);
 2 - Definir um identificador para o evento de conversão e inserí-lo no script abaixo onde diz `'IDENTIFICADOR DESEJADO'`;
 3 - Adicionar o código na página que contém o formulário.
 
