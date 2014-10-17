@@ -59,7 +59,7 @@ Ps.: Recomenda-se que o campo de nome tenha name="name", pois assim esse será o
 
 ### Avisos de conversão por email
 
-O RD Station pode lhe enviar um email quando uma nova conversão for realizada em seu site. Para isso, basta colocar o seu email na configuração da página da API https://www.rdstation.com.br/integracoes
+O RD Station pode lhe enviar um email quando uma nova conversão for realizada em seu site. Para isso, basta colocar o seu email na configuração da [página da API](https://www.rdstation.com.br/integracoes)
 
 
 ### Exemplo completo
