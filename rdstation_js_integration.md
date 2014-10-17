@@ -1,5 +1,5 @@
 # Integrações RD Station
-## Integração Genérica via JavaScript 
+## Como instalar script para integração com formulário
 
 Essa é a integração mais simples de ser feita. Basta apenas adicionar um script padrão diretamente na página do seu formulário, assim como o Google Analytics.
 
