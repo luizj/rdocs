@@ -57,7 +57,7 @@ function addLeadConversionToRdstationCrm( $rdstation_token, $identifier, $data_a
     unset($data_array["password"], $data_array["password_confirmation"], $data_array["senha"], 
           $data_array["confirme_senha"], $data_array["captcha"], $data_array["_wpcf7"], 
           $data_array["_wpcf7_version"], $data_array["_wpcf7_unit_tag"], $data_array["_wpnonce"], 
-          $data_array["_wpcf7_is_ajax_call"], $data_array["your-email"]);
+          $data_array["_wpcf7_is_ajax_call"], $data_array["_wpcf7_locale"], $data_array["your-email"]);
       
     if ( !empty($data_array["token_rdstation"]) && !( empty($data_array["email"]) && empty($data_array["email_lead"]) ) ) {
       $data_query = http_build_query($data_array);
