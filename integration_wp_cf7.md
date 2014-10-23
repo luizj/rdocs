@@ -13,4 +13,4 @@ Se você ainda não tem tanta familiaridade com o plugin Contact Form 7, veja al
 ###Versões do plugin Contact Form 7
 
 - [Até a versão 3.8.1](integration_wp_cf7_3_8_1.md)
-- [Versões 3.9 e 4.0](integration_wp_cf7_3_9+.md)
+- [Versão 3.9 ou superior](integration_wp_cf7_3_9+.md)
