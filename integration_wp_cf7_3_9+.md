@@ -1,5 +1,5 @@
 # Integrações RD Station
-## Wordpress e Contact Form 7 a partir da versão 3.9
+## Wordpress e Contact Form 7 3.9+
 
 ### Criar ou configurar formulários do Contact Form 7 para versões 3.9 e 4.0
 
