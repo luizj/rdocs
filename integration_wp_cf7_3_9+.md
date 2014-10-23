@@ -29,11 +29,13 @@ function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0
 ### Editar tema
 
 Para enviar os dados do formulário para o RD Station, insira o código abaixo no final do arquivo <code>functions.php</code> do seu tema do Wordpress.
+Atenção para dois pontos:
 
-Antes de salvar, é preciso alterar o código inserindo o token RD Station de sua conta (encontrado em https://www.rdstation.com.br/docs/api ).
+1 - Antes de salvar, é preciso alterar o código inserindo o token RD Station de sua conta (encontrado em https://www.rdstation.com.br/docs/api ).
+
+2 - O código abaixo deve ser inserido dentro das tags de PHP. (<?php (...) ?>)
 
 ```PHP
-<?php
 /**
  * RD Station - Integrações
  * addLeadConversionToRdstationCrm()
@@ -85,7 +87,6 @@ function addLeadConversionToRdstationCrmViaWpCf7( $cf7 ) {
   addLeadConversionToRdstationCrm($token_rdstation, null, $form_data);
 }
 add_action('wpcf7_mail_sent', 'addLeadConversionToRdstationCrmViaWpCf7');
-?>
 ```
 
 > É possível também inserir outros parâmetros do POST para enviar ao RD Station
