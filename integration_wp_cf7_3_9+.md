@@ -1,7 +1,7 @@
 # Integrações RD Station
 ## Wordpress e Contact Form 7 3.9+
 
-### Criar ou configurar formulários do Contact Form 7 para versões 3.9 e 4.0
+### 1 - Criar ou configurar formulários do Contact Form 7 para versões 3.9 e 4.0
 
 Quando for criar um formulário no painel do plugin, eu editar algum, é preciso padronizar os mesmos tipos de input para usarem sempre os mesmos nomes (por ex.: 'email' para email, 'nome' para nome, etc), assim seu formulário ficará mais ou menos assim:
 
@@ -14,7 +14,9 @@ Quando for criar um formulário no painel do plugin, eu editar algum, é preciso
 
 > É possível utilizar uma lista de outros campos já cadastrados na ferramenta de CRM do RD Station. Segue uma breve lista de opções:<ul><li>nome</li><li>telefone</li><li>empresa</li><li>cargo</li><li>twitter</li></ul>
 
-É preciso também incluir dois novos campos para passar o identificador do formulário/página e o cookie utmz do Google Analytics (*preenchido automaticamente com um código Javascript presente também no fragmento abaixo):
+É preciso também incluir dois novos campos para passar o identificador do formulário/página e o cookie utmz do Google Analytics (*preenchido automaticamente com um código Javascript presente também no fragmento abaixo).
+
+O código abaixo deve ser adicionado quando você editar ou criar um novo formulário de contato. Cada formulário pode assumir um identificador diferente. 
 
 ```HTML
 <div style="display:none;">
@@ -26,7 +28,33 @@ function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0
 </script>
 ```
 
-### Editar tema
+Exemplo de Formulário de contato completo:
+
+```
+<p>Seu nome (obrigatório)<br />
+    [text* your-name] </p>
+
+<p>Seu e-mail (obrigatório)<br />
+    [email* email] </p>
+
+<p>Assunto<br />
+    [text your-subject] </p>
+
+<p>Sua mensagem<br />
+    [textarea your-message] </p>
+
+<p>[submit "Enviar"]</p>
+
+<div style="display:none;">
+[text identificador "IDENTIFICADOR DESEJADO"]
+[text c_utmz id:cookieutmz ""]
+</div>
+<script type="text/javascript">
+function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0;d<c.length;d++){var e=c[d];while(e.charAt(0)==" ")e=e.substring(1,e.length);if(e.indexOf(b)==0){return e.substring(b.length,e.length)}}return null}try{document.getElementById("cookieutmz").value=read_cookie("__utmz")}catch(err){}
+</script>
+```
+
+### 2 - Editar tema
 
 Para enviar os dados do formulário para o RD Station, insira o código abaixo no final do arquivo <code>functions.php</code> do seu tema do Wordpress.
 Atenção para dois pontos:
