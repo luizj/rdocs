@@ -59,7 +59,7 @@ function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0
 Para enviar os dados do formulário para o RD Station, insira o código abaixo no final do arquivo <code>functions.php</code> do seu tema do Wordpress.
 Atenção para dois pontos:
 
-1 - Antes de salvar, é preciso alterar o código inserindo o token RD Station de sua conta (encontrado em https://www.rdstation.com.br/docs/api ).
+1 - Antes de salvar, é preciso alterar o código inserindo o token RD Station de sua conta (encontrado em https://www.rdstation.com.br/integracoes ).
 
 2 - O código abaixo deve ser inserido dentro das tags de PHP. (<?php (...) ?>)
 
@@ -122,7 +122,7 @@ add_action('wpcf7_mail_sent', 'addLeadConversionToRdstationCrmViaWpCf7');
 ### Avisos de conversão por email
 
 O RD Station pode lhe enviar um email quando uma nova conversão for realizada em seu site.
-Para isso, basta colocar o seu email na configuração da página da API https://www.rdstation.com.br/docs/api
+Para isso, basta colocar o seu email na [configuração da página de integrações](https://www.rdstation.com.br/integracoes)
 
 ### Erros
 
