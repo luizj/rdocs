@@ -1,14 +1,14 @@
 # Integrações RD Station
-## Como instalar script para integração com formulário
+## Como instalar o script para integração com formulário
 
-Essa é a integração mais simples de ser feita. Basta adicionar um script padrão diretamente na página do seu formulário, assim como o Google Analytics.
+Essa é a integração mais simples de ser feita. Basta adicionar o script diretamente na página do seu formulário, assim como o Google Analytics.
 
 Os seus formulários irão para o RD Station com um identificador. Identificador é o nome do evento, por exemplo, cadastro, newsletter, formulário de orçamento, contato, entre outros, que irá aparecer na conversão do Lead no seu RD Station.
 
 
 ### Funcionamento
 
-O componente integrador irá identificar automaticamente seu formulário se ele possuir um `input` com o nome **email**:
+O componente integrador irá identificar automaticamente seu formulário se ele possuir um campo (`input`) com o nome **email**:
 ```HTML
 <input type="text" name="email" />
 ```
@@ -32,21 +32,22 @@ Para realizar a integração você deve **inserir o script abaixo na página que
 </script>
 ```
 
-Após esses passos, recomendamos sempre testar a integração para verificar se todos dados aparecem no RD Station.
+Após realizar esses passos, a sua integração está **pronta**. 
+Recomendamos realizar alguns testes de integração para verificar se todos os dados aparecem no RD Station.
 
 #### Meu formulário não atende ao padrão mencionado
 
-Caso seu formulário tenha o campo de e-mail mas o `input` tenha nome diferente de <strong>email</strong>, você pode configurar a correspondência de campos.
+Caso seu formulário possua um campo para o Lead informar o e-mail, porém o `input` desse campo tenha um nome diferente de <strong>email</strong>, você deverá configurar uma correspondência de campos.
 
-Isso vale também para os outros campos. Se o campo de nome do Lead tem `name="nome_completo"` ou se o campo de cargo tem `name="cargo_do_usuario"`, você pode utilizar a mesma estrutura para que esses dados sejam enviados corretamente para o RD Station.
+Essa correspondência entre campos do seu formulário e os campos do RD Station pode ser feita também para outros campos. Por exemplo, se o campo onde o Lead informa o nome seja `name="nome_completo"` ou se o campo com informações a respeito do cargo do Lead seja `name="cargo_do_usuario"`, você pode utilizar a mesma estrutura para que esses dados sejam enviados corretamente para o RD Station.
 
-Suponha que seu formulário tenha os seguintes campos:
+Suponha que seu formulário possua os seguintes campos:
 ```HTML
 <input type="text" name="email_do_usuario" />
 <input type="text" name="Nome Completo" />
 ```
 
-Você deve adicionar o código abaixo no script de integração:
+Você deve adicionar o código abaixo no script de integração para que a correspondência de campos seja feita e os dados sejam adicionados corretamente no RD Station.
 
 ```javascript
     var meus_campos = {
@@ -56,7 +57,7 @@ Você deve adicionar o código abaixo no script de integração:
     options = { fieldMapping: meus_campos }
 ```
 
-Assim, para integrar seu formulário, siga os passos 1 e 2 normalmente, e no passo 3 utilize o código abaixo:
+Esse dados devem ser inseridos imediatamente antes da linha onde a integração é feita. Assim, para integrar seu formulário, siga os passos 1 e 2 normalmente, e no passo 3 o seu código deverá ser algo como:
 
 ```HTML
 <script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
@@ -82,11 +83,12 @@ Os campos abaixo irão aparecer diretamente na tela de informação de Lead se m
 <li>twitter</li>
 </ul>
 
-Todas as informações que você deseja enviar ao RD Station deve estar em um <em>input</em> com uma tag <strong>name</strong>. Essas informações ficarão disponíveis nos detalhes da conversão do lead.
+Todas as informações que você deseja enviar ao RD Station devem estar em um HTML <em>input</em> e obrigatoriamente devem possuir uma tag <strong>name</strong> para identificá-los. Essas informações também ficarão disponíveis nos detalhes da conversão do Lead.
 ```HTML
 <input type="text" name="Telefone" />
 ```
-Ps.: Recomenda-se que o campo de nome tenha name="name", pois assim esse será o nome do Lead criado no RD Station. Caso contrário, o e-mail do Lead aparecerá no lugar do nome.
+
+Recomendamos que o campo de nome possua a tag name="name", pois dessa forma, esse será o nome do Lead criado no RD Station. Caso não seja enviada essa informação, o nome do Lead será preenchida com o seu e-mail.
 ```HTML
 <input type="text" name="name" />
 ```
@@ -157,6 +159,6 @@ A API pode retornar erro caso:
  - (400) não esteja recebendo um identificador;
  - (400) não esteja recebendo o email (<strong>email</strong> ou <strong>email_lead</strong>) vindo do formulário;
 
-É importante testar a integração após as modificações para evitar que erros comos esses acima apareçam para o seu visitante.
+É importante testar a integração após as modificações para evitar que erros como esses acima apareçam para o seu visitante.
 
-Também é interessante usar alguma validação dos campos pedidos para evitar o não preenchimento do campo de email.
+Recomendados a utilização de alguma mecanismo para validação dos campos do formulário garantindo que o campo e-mail (obrigatório) seja sempre informado pelo visitante. 
