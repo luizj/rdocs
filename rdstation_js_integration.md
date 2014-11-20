@@ -1,24 +1,23 @@
 # Integrações RD Station
 ## Como instalar script para integração com formulário
 
-Essa é a integração mais simples de ser feita. Basta apenas adicionar um script padrão diretamente na página do seu formulário, assim como o Google Analytics.
+Essa é a integração mais simples de ser feita. Basta adicionar um script padrão diretamente na página do seu formulário, assim como o Google Analytics.
 
 Os seus formulários irão para o RD Station com um identificador. Identificador é o nome do evento, por exemplo, cadastro, newsletter, formulário de orçamento, contato, entre outros, que irá aparecer na conversão do Lead no seu RD Station.
 
 
-### Requisito (presença campo email)
+### Funcionamento
 
-Existe uma característica necessária e muito importante para a integração funcionar (talvez você precise editá-la ou adicioná-a na sua página)
-
-
-Todo formulário a ser integrado deve ter um input com o nome <strong>email</strong> ou <strong>email_lead</strong>:
+O componente integrador irá identificar automaticamente seu formulário se ele possuir um `input` com o nome **email**:
 ```HTML
 <input type="text" name="email" />
 ```
 
-### Integrando os seus formulários
+Se o seu formulário possui o `input` mencionado, siga os passos abaixo para integrar seu formulário.
 
-Uma vez atendida a especificação acima, para realizar a integração você deve inserir o script abaixo na página que contém o formulário, seguindo esses passos:
+### Passo a passo da integração
+
+Para realizar a integração você deve **inserir o script abaixo na página que contém o formulário**, seguindo esses passos:
 
 1 - Inserir seu token RD Station onde diz `'SEU_TOKEN_RDSTATION_AQUI'`. Ele pode ser obtido nas suas [Configurações do RD Station](https://www.rdstation.com.br/integracoes);
 
@@ -29,16 +28,51 @@ Uma vez atendida a especificação acima, para realizar a integração você dev
 ```HTML
 <script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
-    RDStationFormIntegration('SEU_TOKEN_RDSTATION_AQUI', 'IDENTIFICADOR DESEJADO');
+    RdIntegration.integrate('SEU_TOKEN_RDSTATION_AQUI', 'IDENTIFICADOR DESEJADO');
 </script>
 ```
 
 Após esses passos, recomendamos sempre testar a integração para verificar se todos dados aparecem no RD Station.
 
+#### Meu formulário não atende ao padrão mencionado
 
-### Outros campos e informações do formulário
+Caso seu formulário tenha o campo de e-mail mas o `input` tenha nome diferente de <strong>email</strong>, você pode configurar a correspondência de campos.
 
-Diversos outros campos podem ser utilizados para um chaveamento automático com o RD Station. Estes campos irão aparecer diretamente na tela de informação de Lead se mantiverem o mesmo nome.
+Isso vale também para os outros campos. Se o campo de nome do Lead tem `name="nome_completo"` ou se o campo de cargo tem `name="cargo_do_usuario"`, você pode utilizar a mesma estrutura para que esses dados sejam enviados corretamente para o RD Station.
+
+Suponha que seu formulário tenha os seguintes campos:
+```HTML
+<input type="text" name="email_do_usuario" />
+<input type="text" name="Nome_Completo" />
+```
+
+Você deve adicionar o código abaixo no script de integração:
+
+```javascript
+    var meus_campos = {
+      "email_do_usuario": "email",
+      "Nome Completo": "name"
+    }
+    options = { fieldMapping: meus_campos }
+```
+
+Assim, para integrar seu formulário, siga os passos 1 e 2 normalmente, e no passo 3 utilize o código abaixo:
+
+```HTML
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
+<script type ='text/javascript'>
+    var meus_campos = {
+      "email_do_usuario": "email",
+      "Nome Completo": "name"
+    }
+    options = { fieldMapping: meus_campos }
+    RdIntegration.integrate('SEU_TOKEN_RDSTATION_AQUI', 'IDENTIFICADOR DESEJADO', options);
+</script>
+```
+
+### Campos do Lead no RD Station
+
+Os campos abaixo irão aparecer diretamente na tela de informação de Lead se mantiverem os nomes listados abaixo. Você pode utilizar a estrutura acima para enviar esses dados com seus respectivos nomes.
 
 <ul>
 <li>nome</li>
@@ -115,7 +149,6 @@ html,body{text-align:center;}
 </body>
 </html>
 ```
-
 
 ### Possíveis Erros
 
