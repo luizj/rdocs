@@ -43,7 +43,7 @@ Isso vale também para os outros campos. Se o campo de nome do Lead tem `name="n
 Suponha que seu formulário tenha os seguintes campos:
 ```HTML
 <input type="text" name="email_do_usuario" />
-<input type="text" name="Nome_Completo" />
+<input type="text" name="Nome Completo" />
 ```
 
 Você deve adicionar o código abaixo no script de integração:
