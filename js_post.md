@@ -1,3 +1,5 @@
+## Fazendo um POST para a API do RD Station
+
 Se você deseja gerar uma um novo Lead ou uma nova conversão em um Lead já existente no RD Station via API, você pode utilizar a função `post` exposta abaixo.
 
 Ela precisa receber um array com os dados a serem enviados para o RD Station. Alguns dados são obrigatórios, sendo eles:
@@ -7,7 +9,7 @@ Ela precisa receber um array com os dados a serem enviados para o RD Station. Al
 
 Os demais dados enviados serão registrados no RD Station como dados da conversão.
 
-## Estrutura dos dados
+### Estrutura dos dados
 
 Segue um exemplo de como utilizar o script para fazer um post para a nossa API:
 
