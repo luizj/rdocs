@@ -145,7 +145,7 @@ html,body{text-align:center;}
 <!-- Início do código de integração -->
 <script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
-    RDStationFormIntegration('f1c940384a971f2982c61a5e5f11e6b9', 'Formulário de contato');
+    RdIntegration.integrate('f1c940384a971f2982c61a5e5f11e6b9', 'Formulário de contato');
 </script>
 <!-- Fim do código de integração -->
 </body>
