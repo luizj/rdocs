@@ -21,12 +21,12 @@ Segue um exemplo de como utilizar o script para fazer um post para a nossa API:
     identificador: 'Formulario de contato',
     token_rdstation: 'f1c940384a971f2982c61a5e5f11e6b9',
     nome: 'Fulano'
-  }
+  };
   RdIntegration.post(data_array);
 </script>
 ```
 
-Com isso, você pode inserir a função `post`, por exemplo, ao submeter um formulário. Para evitar que você perca a função que executava antes da integração, você pode inseri-la como parâmetro no post. Por exemplo:
+Com isso, você pode inserir a função `post`, por exemplo, ao submeter um formulário. Para evitar que você perca a função que executava antes da integração, você pode inseri-la como um função nos parâmetros no post. Por exemplo:
 
 ```html
 <script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
@@ -36,8 +36,8 @@ Com isso, você pode inserir a função `post`, por exemplo, ao submeter um form
     identificador: 'Formulario de contato',
     token_rdstation: 'f1c940384a971f2982c61a5e5f11e6b9',
     nome: 'Fulano'
-  }
-  RdIntegration.post(data_array, alert('callback'));
+  };
+  RdIntegration.post(data_array, function () { alert('callback'); });
 </script>
 ```
 
