@@ -22,7 +22,7 @@ Segue um exemplo de como utilizar o script para fazer um post para a nossa API:
     token_rdstation: 'f1c940384a971f2982c61a5e5f11e6b9',
     nome: 'Fulano'
   }
-    RdIntegration.post(data_array);
+  RdIntegration.post(data_array);
 </script>
 ```
 
@@ -37,7 +37,8 @@ Com isso, você pode inserir a função `post`, por exemplo, ao submeter um form
     token_rdstation: 'f1c940384a971f2982c61a5e5f11e6b9',
     nome: 'Fulano'
   }
-    RdIntegration.post(data_array, alert('callback'));
+  RdIntegration.post(data_array, alert('callback'));
 </script>
 ```
 
+Para maiores informações você pode [abrir um ticket diretamente no suporte](http://ajuda.rdstation.com.br/hc/pt-br/requests/new).
