@@ -7,7 +7,9 @@ Se você utiliza a plataforma Joomla, você pode integrar seus formulários com 
 Ao criar seu formulário, siga os passos:
 
  1 - Clique em `FORM OPTIONS`;
+
  2 - Acesse a aba `JavaScript`;
+
  3 - dentro da função `before_load()` insira o código abaixo, fazendo as alterações descritas no próximo item:
 
  ```javascript
@@ -44,8 +46,11 @@ loadScript(
   Altere os seguintes dados:
   
  1 - troque "SEU_TOKEN_RDSTATION" pelo seu [token do RD Station](https://rdstation.com.br/integracoes);
+
  2 - troque "IDENTIFICADOR DESEJADO" pelo identificador que você deseja relacionar a esse formulário;
+
  3 - associe os dados do seu formulário aos dados do RD Station:
+ 
  Vá em editar o campo de e-mail e copie o `Field name` dele e coloque como `email` na variável *meus campos*:
 
 ```javascript
