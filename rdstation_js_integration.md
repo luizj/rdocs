@@ -159,6 +159,14 @@ A API pode retornar erro caso:
  - (400) não esteja recebendo um identificador;
  - (400) não esteja recebendo o email (<strong>email</strong> ou <strong>email_lead</strong>) vindo do formulário;
 
+
+### Possíveis Alertas
+- (302) A API recebeu algum alerta e, ainda assim, registrou a conversão normalmente.
+- Seu servidor pode emitir para o navegador um alerta de `No Access-Control-Allow-Origin`.
+Este é um alerta de segurança pelo fato de estar trocando dados com outro servidor. Apesar do alerta, a integração funciona normalmente sem afetar nada no seu site.
+
+
+
 É importante testar a integração após as modificações para evitar que erros como esses acima apareçam para o seu visitante.
 
 Recomendados a utilização de alguma mecanismo para validação dos campos do formulário garantindo que o campo e-mail (obrigatório) seja sempre informado pelo visitante. 
