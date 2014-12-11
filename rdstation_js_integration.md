@@ -47,28 +47,30 @@ Suponha que seu formulário possua os seguintes campos:
 <input type="text" name="Nome Completo" />
 ```
 
-Você deve adicionar o código abaixo no script de integração para que a correspondência de campos seja feita e os dados sejam adicionados corretamente no RD Station.
+Você deve colocar somente o código abaixo do script de integração para que a correspondência de campos seja feita e os dados sejam adicionados corretamente no RD Station.
 
-```javascript
-    var meus_campos = {
-      "email_do_usuario": "email",
-      "Nome Completo": "name"
-    }
-    options = { fieldMapping: meus_campos }
-```
-
-Esse dados devem ser inseridos imediatamente antes da linha onde a integração é feita. Assim, para integrar seu formulário, siga os passos 1 e 2 normalmente, e no passo 3 o seu código deverá ser algo como:
+Assim, para integrar seu formulário, siga os passos 1 e 2 normalmente, e no passo 3 o seu código deverá ser algo como:
 
 ```HTML
 <script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
     var meus_campos = {
       "email_do_usuario": "email",
-      "Nome Completo": "name"
+      "Nome Completo": "name",
     }
     options = { fieldMapping: meus_campos }
     RdIntegration.integrate('SEU_TOKEN_RDSTATION_AQUI', 'IDENTIFICADOR DESEJADO', options);
 </script>
+```
+Para cada campo adicionado, a linha deve terminar com uma virgula.
+Exemplo:
+```JavaScript
+var meus_campos = {
+      "email_do_usuario": "email",
+      "Nome Completo": "name",
+      "IdadeDoCliente": "idade",
+      "Empresa do Usuario": "empresa",
+    }
 ```
 
 ### Campos do Lead no RD Station
