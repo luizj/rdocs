@@ -49,7 +49,12 @@ Suponha que seu formulário possua os seguintes campos:
 
 Você deve colocar somente o código abaixo do script de integração para que a correspondência de campos seja feita e os dados sejam adicionados corretamente no RD Station.
 
-Assim, para integrar seu formulário, siga os passos 1 e 2 normalmente, e no passo 3 o seu código deverá ser algo como:
+Assim, para integrar seu formulário, siga os passos 1 e 2 normalmente, e no passo 3 faça as seguintes alterações:
+
+- Adicione a combinação de campos;
+- Adicione o parâmetro **options** na linha que chama a integração.
+
+O seu código deverá ser algo como:
 
 ```HTML
 <script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
