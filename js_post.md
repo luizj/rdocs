@@ -26,7 +26,9 @@ Segue um exemplo de como utilizar o script para fazer um post para a nossa API:
 </script>
 ```
 
-Com isso, você pode inserir a função `post`, por exemplo, ao submeter um formulário. Para evitar que você perca a função que executava antes da integração, você pode inseri-la como um função nos parâmetros no post. Por exemplo:
+### Integrando formulário via método Post
+
+Você pode inserir a função `post`, por exemplo, ao submeter um formulário. Para evitar que você perca a função que executava antes da integração, você pode inseri-la como um função nos parâmetros no post. Por exemplo:
 
 ```html
 <script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
@@ -41,4 +43,13 @@ Com isso, você pode inserir a função `post`, por exemplo, ao submeter um form
 </script>
 ```
 
-Para maiores informações você pode [abrir um ticket diretamente no suporte](http://ajuda.rdstation.com.br/hc/pt-br/requests/new).
+Se você capturar os dados do Lead diretamente do formulário, não se esqueça de enviar seu token do RD Station. Para isso, você pode adicionar ao formulário um campo hidden com o valor do token público de sua conta:
+
+```
+<input type="hidden" id="token_rdstation" name="token_rdstation" VALUE="f1c940384a971f2982c61a5e5f11e6b9">
+```
+
+Seu token pode ser obtido na [página de integrações do RD Station](https://rdstation.com.br/integracoes).
+
+
+Se você tiver algum problema em utilizar essa função, você pode [abrir um ticket diretamente no suporte](http://ajuda.rdstation.com.br/hc/pt-br/requests/new).
