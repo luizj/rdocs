@@ -10,7 +10,7 @@ Se você ainda não tem tanta familiaridade com o plugin Contact Form 7, veja al
 
 [http://www.comocriarmeusite.com.br/wordpress-2/formulario-de-contato-no-wordpress-contact-form-7/#middle-post](http://www.comocriarmeusite.com.br/wordpress-2/formulario-de-contato-no-wordpress-contact-form-7/#middle-post)
 
-###Versões do plugin Contact Form 7
+###Instruções para integração
 
 - [Até a versão 3.8.1](integration_wp_cf7_3_8_1.md)
 - [Versão 3.9 ou superior](integration_wp_cf7_3_9+.md)
