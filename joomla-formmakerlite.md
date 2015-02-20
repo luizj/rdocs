@@ -29,9 +29,7 @@ var meus_campos = {
   'wdform_1_elementform_id_temp': 'email'
 };
 
-var options = {
-  options: meus_campos
-}
+var options = { fieldMapping: meus_campos }
 
 loadScript(
   "https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js",
