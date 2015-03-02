@@ -66,7 +66,7 @@ function before_reset()
   };
 ```
 
-*Note que é preciso colocar o `Field name` na função `document.getElementById('wdform_1_elementform_id_temp').value`.*
+**Note que é preciso colocar o `Field name` na função `document.getElementById('wdform_1_elementform_id_temp').value`.**
 
 Repita esse passo para os demais campos, ficando, por exemplo, assim:
 
@@ -80,7 +80,7 @@ Repita esse passo para os demais campos, ficando, por exemplo, assim:
   };
 ```
 
-*O campo nome é composto por dois campos, por isto tem um formato um pouco diferente dos demais.'
+**O campo nome é composto por dois campos, por isto tem um formato um pouco diferente dos demais.'**
 
 Por fim, a caixa do JavaScript deve estar semelhante a essa:
 
