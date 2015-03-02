@@ -66,7 +66,8 @@ function before_reset()
   };
 ```
 
-**Note que é preciso colocar o `Field name` na função `document.getElementById('wdform_1_elementform_id_temp').value`.**
+**Note que é preciso colocar o `Field name` dentro dos parênteses e dentro de aspas simples na função `document.getElementById('wdform_1_elementform_id_temp').value`.**
+No caso acima, você substituiria `wdform_1_elementform_id_temp` pelo `Field name` do email no seu formulário
 
 Repita esse passo para os demais campos, ficando, por exemplo, assim:
 
