@@ -10,7 +10,7 @@ Ao criar seu formulário, siga os passos:
 
  2 - Acesse a aba `JavaScript`;
 
- 3 - dentro da função `before_load()` insira o código abaixo, fazendo as alterações descritas no próximo item:
+ 3 - dentro das funções `before_load()` e `before_submit()` insira os códigos abaixo, fazendo as alterações descritas no próximo item:
 
  ```javascript
 
