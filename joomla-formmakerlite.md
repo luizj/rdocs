@@ -10,33 +10,40 @@ Ao criar seu formulário, siga os passos:
 
  2 - Acesse a aba `JavaScript`;
 
- 3 - dentro da função `before_load()` insira o código abaixo, fazendo as alterações descritas no próximo item:
+ 3 - dentro das funções `before_load()` e `before_submit()` insira os códigos abaixo, fazendo as alterações descritas no próximo item:
 
  ```javascript
 
-loadScript = function(c, b) {
-  var d = document.getElementsByTagName("head")[0],
-    a = document.createElement("script");
-  a.type = "text/javascript";
-  a.src = c;
-  a.onload = b;
-  a.onreadystatechange = function() {
-    "complete" === this.readyState && b()
+function before_load()
+{
+  loadScript = function() {
+    var head = document.getElementsByTagName("head")[0],
+      script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js";
+    head.appendChild(script)
   };
-  d.appendChild(a)
-};
-var meus_campos = {
-  'wdform_1_elementform_id_temp': 'email'
+
+  loadScript();
 };
 
-var options = { fieldMapping: meus_campos }
+// Occurs just before submitting  the form
+function before_submit()
+{
+  var dados = {
+    'email': document.getElementById('wdform_2_element1').value,
+    'identificador': 'IDENTIFICADOR DESEJADO',
+    'token_rdstation': 'SEU_TOKEN_RDSTATION'
+  };
 
-loadScript(
-  "https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js",
-  function() {
-    RdIntegration.integrate('SEU_TOKEN_RDSTATION', 'IDENTIFICADOR DESEJADO', options);
-  }
-);
+  RdIntegration.post(dados);
+}
+
+// Occurs just before resetting the form
+function before_reset()
+{
+
+}
  ```
 
 ### Configurando a integração
@@ -49,23 +56,32 @@ loadScript(
 
  3 - associe os dados do seu formulário aos dados do RD Station:
  
- Vá em editar o campo de e-mail e copie o `Field name` dele e coloque como `email` na variável *meus campos*:
+ Vá em editar o campo de e-mail e copie o `Field name` dele e coloque como `email` na variável *dados*:
 
 ```javascript
- var meus_campos = {
-  'wdform_1_elementform_id_temp': 'email'
-};
+  var dados = {
+    'email': document.getElementById('wdform_1_elementform_id_temp').value,
+    'identificador': 'IDENTIFICADOR DESEJADO',
+    'token_rdstation': 'SEU_TOKEN_RDSTATION'
+  };
 ```
+
+**Note que é preciso colocar o `Field name` dentro dos parênteses e dentro de aspas simples na função `document.getElementById('wdform_1_elementform_id_temp').value`.**
+No caso acima, você substituiria `wdform_1_elementform_id_temp` pelo `Field name` do email no seu formulário
 
 Repita esse passo para os demais campos, ficando, por exemplo, assim:
 
 ```javascript
- var meus_campos = {
-  'wdform_1_elementform_id_temp': 'email',
-  'wdform_2_element_firstform_id_temp, wdform_2_element_lastform_id_temp': 'nome',
-  'wdform_4_element_firstform_id_temp, wdform_4_element_lastform_id_temp': 'telefone'
-};
+  var dados = {
+    'email': document.getElementById('wdform_1_elementform_id_temp').value,
+    'telefone': document.getElementById('wdform_2_element_form_id_temp').value,
+    'nome': document.getElementById('wdform_3_element_firstform_id_temp').value + ' ' + 'document.getElementById('wdform_3_element_lastform_id_temp').value,
+    'identificador': 'IDENTIFICADOR DESEJADO',
+    'token_rdstation': 'SEU_TOKEN_RDSTATION'
+  };
 ```
+
+**O campo nome é composto por dois campos, por isto tem um formato um pouco diferente dos demais.'**
 
 Por fim, a caixa do JavaScript deve estar semelhante a essa:
 
@@ -73,46 +89,35 @@ Por fim, a caixa do JavaScript deve estar semelhante a essa:
 // Occurs before the form is loaded
 function before_load()
 {
-  loadScript = function(c, b) {
-    var d = document.getElementsByTagName("head")[0],
-      a = document.createElement("script");
-    a.type = "text/javascript";
-    a.src = c;
-    a.onload = b;
-    a.onreadystatechange = function() {
-      "complete" === this.readyState && b()
-    };
-    d.appendChild(a)
+  loadScript = function() {
+    var head = document.getElementsByTagName("head")[0],
+      script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js";
+    head.appendChild(script)
   };
 
-   var meus_campos = {
-    'wdform_1_elementform_id_temp': 'email',
-    'wdform_2_element_firstform_id_temp, wdform_2_element_lastform_id_temp': 'nome',
-    'wdform_4_element_firstform_id_temp, wdform_4_element_lastform_id_temp': 'telefone'
-  };
-
-  var options = {
-    options: meus_campos
-  }
-
-  loadScript(
-    "https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js",
-    function() {
-      RdIntegration.integrate('f1c940384a971f2982c61a5e5f11e6b9', 'pagina-contato', options);
-    }
-  );
+  loadScript();
 }
 
 // Occurs just before submitting  the form
 function before_submit()
 {
-     
+ var dados = {
+    'email': document.getElementById('wdform_1_elementform_id_temp').value,
+    'telefone': document.getElementById('wdform_2_element_form_id_temp').value,
+    'nome': document.getElementById('wdform_3_element_firstform_id_temp').value + ' ' + 'document.getElementById('wdform_3_element_lastform_id_temp').value,
+    'identificador': 'IDENTIFICADOR DESEJADO',
+    'token_rdstation': 'SEU_TOKEN_RDSTATION'
+  };
+
+  RdIntegration.post(dados);
 }
 
 // Occurs just before resetting the form
 function before_reset()
 {
-     
+
 }
 ```
 
