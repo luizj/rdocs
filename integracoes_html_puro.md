@@ -83,3 +83,63 @@ Também é interessante usar alguma validação dos campos para requerer o preen
 ### Exemplos completos
 
 Na código HTML abaixo, é possível ver uma página com um formulário simples que envia as informações para a API e depois redireciona o visitante para outra página.
+
+
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>HTML Puro | IntegraÃ§Ãµes RD Station</title>
+<style type="text/css">
+html,body{text-align:center;}
+#wrapper{width:600px; margin:0 auto; text-align:center;}
+#conversion-form{width:300px; margin:0 auto; border:1px solid silver;text-align:left;}
+#conversion-form .field{padding:4px;}
+#conversion-form .actions{text-align:center;}
+#conversion-form label{display:block;}
+#conversion-form input[type=text]{width:90%;}
+</style>
+</head>
+<body>
+<div id="wrapper">
+
+  <h1>IntegraÃ§Ãµes RD Station</h1>
+  <h2>HTML Puro</h2>
+
+  <form action="https://www.rdstation.com.br/api/1.2/conversions" method="POST">
+    <input type="hidden" name="token_rdstation" value="f1c940384a971f2982c61a5e5f11e6b9" />
+    <!--
+      * AtenÃ§Ã£o!
+      * Token de testes - Usar o prÃ³prio de sua conta encontrado em: https://www.rdstation.com.br/docs/api
+    -->
+    <input type="hidden" name="identificador" value="teste-html-puro" />
+    <input type="hidden" name="redirect_to" value="http://resultadosdigitais.com.br" />
+
+    <div class="field">
+      <label>E-mail:*</label>
+      <input type="text" name="email" />
+    </div>
+    <div class="field">
+      <label>Nome:*</label>
+      <input type="text" name="nome" />
+    </div>
+    <div class="field">
+      <label>Empresa:</label>
+      <input type="text" name="empresa" />
+    </div>
+    <div class="actions">
+<input type="hidden" name="c_utmz" id="c_utmz" value="" />
+<script type="text/javascript">
+function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0;d<c.length;d++){var e=c[d];while(e.charAt(0)==" ")e=e.substring(1,e.length);if(e.indexOf(b)==0){return e.substring(b.length,e.length)}}return null}try{document.getElementById("c_utmz").value=read_cookie("__utmz")}catch(err){}
+</script>
+      <input type="submit" value="Enviar" />
+    </div>
+  </form>
+
+</div>
+
+</body>
+</html>
+```
+
