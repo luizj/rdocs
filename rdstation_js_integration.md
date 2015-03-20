@@ -161,7 +161,14 @@ html,body{text-align:center;}
 
 ### Possíveis Erros
 
-A API pode retornar erro caso:
+#### Incompatibilidade entre scripts
+
+Caso seu site já utilize algum javascript no formulário a ser integrado, é possível que haja incompatibilidade com nosso script de integração.
+
+Nesse caso, você pode buscar uma saída mais técnica: A Resultados Digitais disponibiliza uma função JavaScript que executa diretamente uma requisição POST para a API do RD Station. Essa requisição contém os dados do formulário, que serão utilizados para a criação do Lead. Mais informações [neste artigo](https://github.com/ResultadosDigitais/rdocs/blob/master/js_post.md). 
+
+
+#### A API pode retornar erro caso:
  - (401) seu token RD Station esteja errado ou inválido;
  - (400) não esteja recebendo um identificador;
  - (400) não esteja recebendo o email (<strong>email</strong> ou <strong>email_lead</strong>) vindo do formulário;
