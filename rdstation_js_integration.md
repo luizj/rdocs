@@ -164,7 +164,7 @@ html,body{text-align:center;}
 #### Incompatibilidade entre scripts
 
 Caso seu site já utilize algum javascript no formulário a ser integrado, é possível que haja incompatibilidade com nosso script de integração. 
-Nesse caso, você pode buscar uma saída mais técnica com nossa função que executa diretamente o POST para a nossa API com os dados do Lead. Mais informações [neste artigo](https://github.com/ResultadosDigitais/rdocs/blob/master/js_post.md). 
+Nesse caso, você pode buscar uma saída mais técnica: A Resultados Digitais disponibiliza uma função JavaScript que executa diretamente uma requisição POST para a API do RD Station. Essa requisição contém os dados do formulário, que serão utilizados para a criação do Lead. Mais informações [neste artigo](https://github.com/ResultadosDigitais/rdocs/blob/master/js_post.md). 
 
 
 #### A API pode retornar erro caso:
