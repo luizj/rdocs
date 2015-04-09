@@ -14,7 +14,7 @@ Os demais dados enviados serão registrados no RD Station como dados da convers�
 Segue um exemplo de como utilizar o script para fazer um post para a nossa API:
 
 ```html
-<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.2.1/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
   var data_array = {
     email: 'integracao@test.com',
@@ -31,7 +31,7 @@ Segue um exemplo de como utilizar o script para fazer um post para a nossa API:
 Você pode inserir a função `post`, por exemplo, ao submeter um formulário. Para evitar que você perca a função que executava antes da integração, você pode inseri-la como um função nos parâmetros no post. Por exemplo:
 
 ```html
-<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.1.0/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.2.1/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
   var data_array = {
     email: 'integracao@test.com',
