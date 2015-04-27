@@ -94,6 +94,28 @@ Para isso, basta colocar o seu email na configuração da página da API https:/
 
 ### Erros
 
+#### Incompatibilidade com script do plugin
+
+Se você integrou seu formulário e ele apresentou os dois problemas abaixo:
+- Cria Leads no RD Station, mas não envia mais emails para você
+- Mostra duas setinhas em círculo que ficam girando e nunca param
+
+Significa que houve uma incompatibilidade entre o script de integração, e o plugin.
+
+Para resolver essa questão, basta você desabilitar o Javascript gera esse loop (as setinhas) . Assim, quando você clicar em enviar ele carregará diretamente a página de redirecionamento.
+
+Caso você queira reativar o loop (o problema deve voltar), basta alterar de false para true no seguinte código, encontrado na linha 50 do arquivo: `/www/wp-content/plugins/contact-form-7/wp-contact-form7.php`:
+
+**Para destivar:**
+
+Na pasta dos plugins, acesse a pasta do Contact Form 7, no arquivo `wp-contact-form-7.php` configure:
+
+```
+if ( ! defined( 'WPCF7_LOAD_JS' ) )
+    define( 'WPCF7_LOAD_JS', false );
+```
+
+#### Respostas da API do RD Station
 A API pode retornar erro caso:
  - (401) seu token RD Station esteja errado ou inválido;
  - (400) não esteja recebendo um identificador;
