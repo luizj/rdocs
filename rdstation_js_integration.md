@@ -19,7 +19,7 @@ Se o seu formulário possui o `input` mencionado, siga os passos abaixo para int
 
 Para realizar a integração você deve **inserir o script abaixo na página que contém o formulário**, seguindo esses passos:
 
-1 - Inserir seu token RD Station onde diz `'SEU_TOKEN_RDSTATION_AQUI'`. Ele pode ser obtido nas suas [Configurações do RD Station](https://www.rdstation.com.br/integracoes);
+1 - Inserir seu token RD Station onde diz `'SEU_TOKEN_RDSTATION_AQUI'`. Ele pode ser obtido na página de [Integrações](https://www.rdstation.com.br/integracoes);
 
 2 - Definir um identificador para o evento de conversão e inserí-lo no script abaixo onde diz `'IDENTIFICADOR DESEJADO'`;
 
