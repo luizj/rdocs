@@ -28,6 +28,7 @@ function addLeadConversionToRdstationCrm( $rdstation_token, $identifier, $data_a
     if (empty($data_array["token_rdstation"]) && !empty($rdstation_token)) { $data_array["token_rdstation"] = $rdstation_token; }
     if (empty($data_array["identificador"]) && !empty($identifier)) { $data_array["identificador"] = $identifier; }
     if (empty($data_array["c_utmz"])) { $data_array["c_utmz"] = $_COOKIE["__utmz"]; }
+    if (empty($data_array["client_id"]) && !empty($_COOKIE["rdtrk"])) { $data_array["client_id"] = json_decode($_COOKIE["rdtrk"])->{'id'};}
     unset($data_array["password"], $data_array["password_confirmation"], $data_array["senha"],
           $data_array["confirme_senha"], $data_array["captcha"], $data_array["_wpcf7"],
           $data_array["_wpcf7_version"], $data_array["_wpcf7_unit_tag"], $data_array["_wpnonce"],
