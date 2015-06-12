@@ -16,7 +16,7 @@ Quando for criar um formulário no painel do plugin, eu editar algum, é preciso
 
 É preciso também incluir dois novos campos para passar o identificador do formulário/página e o cookie utmz do Google Analytics (*preenchido automaticamente com um código Javascript presente também no fragmento abaixo).
 
-O código abaixo deve ser adicionado quando você editar ou criar um novo formulário de contato. Cada formulário pode assumir um identificador diferente. 
+O código abaixo deve ser adicionado quando você editar ou criar um novo formulário de contato. Cada formulário pode assumir um identificador diferente.
 
 ```HTML
 <div style="display:none;">
@@ -82,11 +82,12 @@ function addLeadConversionToRdstationCrm( $rdstation_token, $identifier, $data_a
     if (empty($data_array["identificador"]) && !empty($identifier)) { $data_array["identificador"] = $identifier; }
     if (empty($data_array["email"])) { $data_array["email"] = $data_array["your-email"]; }
     if (empty($data_array["c_utmz"])) { $data_array["c_utmz"] = $_COOKIE["__utmz"]; }
-    unset($data_array["password"], $data_array["password_confirmation"], $data_array["senha"], 
-          $data_array["confirme_senha"], $data_array["captcha"], $data_array["_wpcf7"], 
-          $data_array["_wpcf7_version"], $data_array["_wpcf7_unit_tag"], $data_array["_wpnonce"], 
+    if (empty($data_array["client_id"]) && !empty($_COOKIE["rdtrk"])) { $data_array["client_id"] = json_decode($_COOKIE["rdtrk"])->{'id'};}
+    unset($data_array["password"], $data_array["password_confirmation"], $data_array["senha"],
+          $data_array["confirme_senha"], $data_array["captcha"], $data_array["_wpcf7"],
+          $data_array["_wpcf7_version"], $data_array["_wpcf7_unit_tag"], $data_array["_wpnonce"],
           $data_array["_wpcf7_is_ajax_call"], $data_array["_wpcf7_locale"], $data_array["your-email"]);
-      
+
     if ( !empty($data_array["token_rdstation"]) && !( empty($data_array["email"]) && empty($data_array["email_lead"]) ) ) {
       $data_query = http_build_query($data_array);
       if (in_array ('curl', get_loaded_extensions())) {
@@ -99,7 +100,7 @@ function addLeadConversionToRdstationCrm( $rdstation_token, $identifier, $data_a
         curl_close($ch);
       } else {
         $params = array('http' => array('method' => 'POST', 'content' => $data_query, 'ignore_errors' => true));
-        $ctx = stream_context_create($params); 
+        $ctx = stream_context_create($params);
         $fp = @fopen($api_url, 'rb', false, $ctx);
       }
     }
