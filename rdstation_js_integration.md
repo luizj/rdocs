@@ -61,7 +61,7 @@ O seu código deverá ser algo como:
 <script type ='text/javascript'>
     var meus_campos = {
       "email_do_usuario": "email",
-      "Nome Completo": "name",
+      "Nome Completo": "nome",
     }
     options = { fieldMapping: meus_campos }
     RdIntegration.integrate('SEU_TOKEN_RDSTATION_AQUI', 'IDENTIFICADOR DESEJADO', options);
@@ -72,7 +72,7 @@ Exemplo:
 ```JavaScript
 var meus_campos = {
       "email_do_usuario": "email",
-      "Nome Completo": "name",
+      "Nome Completo": "nome",
       "IdadeDoCliente": "idade",
       "Empresa do Usuario": "empresa",
     }
