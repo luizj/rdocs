@@ -31,6 +31,8 @@ Para realizar a integração você deve **inserir o script abaixo na página que
 
 6 - **Pronto!** Seu formulário está integrado! Todas as submissões serão enviadas como conversões ao RD Station. Recomendamos o teste do formulário para conferimento da integração.
 
+### Passo a passo para criação do script manualmente
+
 Caso deseje gerar o script manualmente, os seguintes passos podem ser executados:
 
 1 - Inserir seu token RD Station onde diz `'SEU_TOKEN_RDSTATION_AQUI'`. Ele pode ser obtido na página de [Integrações](https://www.rdstation.com.br/integracoes);
