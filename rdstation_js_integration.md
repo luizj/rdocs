@@ -13,11 +13,25 @@ O componente integrador irá identificar automaticamente seu formulário se ele 
 <input type="text" name="email" />
 ```
 
-Se o seu formulário possui o `input` mencionado, siga os passos abaixo para integrar seu formulário.
+Se o seu formulário possui o `input` mencionado, com atributo name="email", siga os passos abaixo para integrar seu formulário.
 
-### Passo a passo da integração
+### Passo a passo para a integração
 
 Para realizar a integração você deve **inserir o script abaixo na página que contém o formulário**, seguindo esses passos:
+
+1 - Acessar a página do RD Station de geração de script para formulários: [Formulários](https://www.rdstation.com.br/integracoes/formulario); 
+
+2 - Preencher o campo **Nome do Formulário** que corresponderá ao identificador das conversões;
+
+3 - Clicar no botão **Gerar Script**; O script será logo em seguida gerado em uma seção abaixo;
+
+4 - Clicar no botão Copiar ou copiar o script gerado;
+
+5 - O script deve ser colado no html da página do formulário, <strong>logo antes</strong> do fechamento da tag </body>.
+
+6 - **Pronto!** Seu formulário está integrado! Todas as submissões serão enviadas como conversões ao RD Station. Recomendamos o teste do formulário para conferimento da integração.
+
+Caso deseje gerar o script manualmente, os seguintes passos podem ser executados:
 
 1 - Inserir seu token RD Station onde diz `'SEU_TOKEN_RDSTATION_AQUI'`. Ele pode ser obtido na página de [Integrações](https://www.rdstation.com.br/integracoes);
 
@@ -26,7 +40,7 @@ Para realizar a integração você deve **inserir o script abaixo na página que
 3 - Adicionar o código na página que contém o formulário.
 
 ```HTML
-<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.3.0/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.4.0/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
     RdIntegration.integrate('SEU_TOKEN_RDSTATION_AQUI', 'IDENTIFICADOR DESEJADO');
 </script>
