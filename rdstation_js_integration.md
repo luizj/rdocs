@@ -118,7 +118,7 @@ Recomendamos que o campo de nome possua a tag name="name", pois dessa forma, ess
 
 ### Avisos de conversão por email
 
-O RD Station pode lhe enviar um email quando uma nova conversão for realizada em seu site. Para isso, basta colocar o seu email na configuração da [página da API](https://www.rdstation.com.br/configuracoes)
+O RD Station pode lhe enviar um email quando uma nova conversão for realizada em seu site. Para isso, basta colocar o seu email na configuração da [página de configurações](https://www.rdstation.com.br/configuracoes)
 
 
 ### Exemplo completo
