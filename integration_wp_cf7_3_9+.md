@@ -82,7 +82,10 @@ function addLeadConversionToRdstationCrm( $rdstation_token, $identifier, $data_a
     if (empty($data_array["identificador"]) && !empty($identifier)) { $data_array["identificador"] = $identifier; }
     if (empty($data_array["email"])) { $data_array["email"] = $data_array["your-email"]; }
     if (empty($data_array["c_utmz"])) { $data_array["c_utmz"] = $_COOKIE["__utmz"]; }
-    if (empty($data_array["client_id"]) && !empty($_COOKIE["rdtrk"])) { $data_array["client_id"] = json_decode($_COOKIE["rdtrk"])->{'id'};}
+    if (empty($data_array["client_id"]) && !empty($_COOKIE["rdtrk"])) { 
+	    preg_match("/(\w{8}-\w{4}-4\w{3}-\w{4}-\w{12})/",$_COOKIE["rdtrk"],$Matches);
+	    $data_array["client_id"] = $Matches[0];
+	}
     unset($data_array["password"], $data_array["password_confirmation"], $data_array["senha"],
           $data_array["confirme_senha"], $data_array["captcha"], $data_array["_wpcf7"],
           $data_array["_wpcf7_version"], $data_array["_wpcf7_unit_tag"], $data_array["_wpnonce"],
