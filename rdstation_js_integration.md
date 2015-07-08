@@ -27,8 +27,10 @@ Para realizar a integração você deve **inserir o script abaixo na página que
 
 4 - Clicar no botão Copiar ou copiar o script gerado;
 
-5 - O script deve ser colado no html da página do formulário, <strong>logo antes</strong> do fechamento da tag </body >.
-
+5 - O script deve ser colado no html da página do formulário, <strong>logo antes</strong> do fechamento da tag: 
+```html 
+</body>
+```
 6 - **Pronto!** Seu formulário está integrado! Todas as submissões serão enviadas como conversões ao RD Station. Recomendamos o teste do formulário para conferimento da integração.
 
 ### Passo a passo para criação do script manualmente
