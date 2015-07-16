@@ -60,12 +60,12 @@ Para associar a função ao submit de um form de seu website, é possível utili
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.4.0/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
-$('form').on('submit', function(event) {
-  event.preventDefault();
-  var $form = $(event.target).closest('form');
-  var inputs = $($form).find(':input').serializeArray();
-  RdIntegration.post(inputs, event.submit); 
-} );
+  $('form').on('submit', function(event) {
+    event.preventDefault();
+    var $form = $(event.target).closest('form');
+    var inputs = $($form).find(':input').serializeArray();
+    RdIntegration.post(inputs, event.submit); 
+  });
 </script>
 ```
 
