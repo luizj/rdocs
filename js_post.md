@@ -32,7 +32,7 @@ Este exemplo acima é executado logo ao abrir a página, o ideal é que a execu�
 Você pode inserir a função `post`, por exemplo, ao submeter um formulário. Para evitar que você perca a função que executava antes da integração, você pode inseri-la como um função nos parâmetros no post. Por exemplo:
 
 ```html
-<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.4.0/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/latest/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
   var data_array = [
     {name: 'email', value: 'integracao@test.com'},
