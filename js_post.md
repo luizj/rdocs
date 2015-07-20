@@ -14,7 +14,7 @@ Os demais dados enviados ser√£o registrados no RD Station como dados da convers√
 Segue um exemplo de como utilizar o script para fazer um post para a nossa API:
 
 ```html
-<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.4.0/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/latest/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
   var data_array = [
     {name: 'email', value: 'integracao@test.com'},
