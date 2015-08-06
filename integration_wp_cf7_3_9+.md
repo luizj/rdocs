@@ -92,20 +92,11 @@ function addLeadConversionToRdstationCrm( $rdstation_token, $identifier, $data_a
           $data_array["_wpcf7_is_ajax_call"], $data_array["_wpcf7_locale"], $data_array["your-email"]);
 
     if ( !empty($data_array["token_rdstation"]) && !( empty($data_array["email"]) && empty($data_array["email_lead"]) ) ) {
-      $data_query = http_build_query($data_array);
-      if (in_array ('curl', get_loaded_extensions())) {
-        $ch = curl_init($api_url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_query);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_exec($ch);
-        curl_close($ch);
-      } else {
-        $params = array('http' => array('method' => 'POST', 'content' => $data_query, 'ignore_errors' => true));
-        $ctx = stream_context_create($params);
-        $fp = @fopen($api_url, 'rb', false, $ctx);
-      }
+      $args = [
+		'headers' => ['Content-Type' => 'application/json'],
+		'body' => json_encode($data_array)
+	];
+	$response = wp_remote_post( $api_url, $args );
     }
   } catch (Exception $e) { }
 }
