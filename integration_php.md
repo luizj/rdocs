@@ -1,76 +1,237 @@
-#Integrações RD Station
+# Integrações RD Station
 
-##PHP
+## PHP
 
 Muitos sites em PHP possuem uma página que é um script para enviar o email de contato ou tratar o preenchimento de algum formulário.
+Para fazer com que essa página envie os dados para o CRM do RD Station, você deve inserir essa classe no seu código, e passar para ela os parâmetros necessários.
 
-Para fazer com que essa página envie os dados para o CRM do RD Station, é só inserir nosso script de integração em seu código e fazer a chamada quando for controlar a submissão dos dados.
+## Classe para integração
 
-##Script para integração
-
+Recomendamos que você crie um arquivo separado para essa classe, chamado `RD_Station.php`. Você não vai precisar alterar este arquivo, apenas importá-lo mais tarde. Dentro do arquivo `RD_Station.php`, cole o código abaixo e salve.
 
 ```PHP
 <?php
-/**
- * RD Station - Integrações
- * addLeadConversionToRdstationCrm()
- * Envio de dados para a API de leads do RD Station
- *
- * Parâmetros:
- *     ($rdstation_token) - token da sua conta RD Station ( encontrado em https://www.rdstation.com.br/docs/api )
- *     ($identifier) - identificador da página ou evento ( por exemplo, 'pagina-contato' )
- *     ($data_array) - um Array com campos do formulário ( por exemplo, array('email' => 'teste@rdstation.com.br', 'nome' =>'Fulano') )
- */
-function addLeadConversionToRdstationCrm( $rdstation_token, $identifier, $data_array ) {
-  $api_url = "http://www.rdstation.com.br/api/1.2/conversions";
 
-  try {
-    if (empty($data_array["token_rdstation"]) && !empty($rdstation_token)) { $data_array["token_rdstation"] = $rdstation_token; }
-    if (empty($data_array["identificador"]) && !empty($identifier)) { $data_array["identificador"] = $identifier; }
-    if (empty($data_array["c_utmz"])) { $data_array["c_utmz"] = $_COOKIE["__utmz"]; }
-    if (empty($data_array["client_id"]) && !empty($_COOKIE["rdtrk"])) { $data_array["client_id"] = json_decode($_COOKIE["rdtrk"])->{'id'};}
-    unset($data_array["password"], $data_array["password_confirmation"], $data_array["senha"],
-          $data_array["confirme_senha"], $data_array["captcha"], $data_array["_wpcf7"],
-          $data_array["_wpcf7_version"], $data_array["_wpcf7_unit_tag"], $data_array["_wpnonce"],
-          $data_array["_wpcf7_is_ajax_call"]);
+class RD_Station{
+  public $form_data;
+  public $token;
+  public $identifier;
+  public $ignore_fields = [];
+  public $redirect_success = null;
+  public $redirect_error = null;
 
-    if ( !empty($data_array["token_rdstation"]) && !( empty($data_array["email"]) && empty($data_array["email_lead"]) ) ) {
-      $data_query = http_build_query($data_array);
+  private $api_url = "http://www.rdstation.com.br/api/1.2/conversions";
+
+  public function __construct($form_data){
+    $this->form_data = $form_data;
+  }
+
+  public function ignore_fields(array $fields){
+    foreach ($this->form_data as $field => $value) {
+      if(in_array($field, $fields)){
+        unset($this->form_data[$field]);
+      }
+    }
+  }
+
+  public function canSaveLead($data){
+    $required_fields = ['email', 'token_rdstation', 'identificador'];
+    foreach ($required_fields as $field) {
+      if(empty($data[$field]) || is_null($data[$field])){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function createLead() {
+    $data_array = $this->form_data;
+    $data_array['token_rdstation'] = $this->token;
+    $data_array['identificador'] = $this->identifier;
+    
+    if(empty($data_array["c_utmz"])){
+      $data_array["c_utmz"] = $_COOKIE["__utmz"];
+    }
+    
+    if(empty($data_array["client_id"]) && !empty($_COOKIE["rdtrk"])) {
+      $data_array["client_id"] = json_decode($_COOKIE["rdtrk"])->{'id'};
+    }
+
+    $data_query = http_build_query($data_array);
+
+    if($this->canSaveLead($data_array)){
       if (in_array ('curl', get_loaded_extensions())) {
-        $ch = curl_init($api_url);
+        $ch = curl_init($this->api_url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_query);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_exec($ch);
         curl_close($ch);
-      } else {
-        $params = array('http' => array('method' => 'POST', 'content' => $data_query, 'ignore_errors' => true));
+      }
+      else {
+        $params = [ 'http' => [ 'method' => 'POST', 'content' => $data_query, 'ignore_errors' => true ] ]; 
         $ctx = stream_context_create($params);
         $fp = @fopen($api_url, 'rb', false, $ctx);
       }
+      $this->redirect_success ? header("Location: ".$this->redirect_success) : header("Location: /");
     }
-  } catch (Exception $e) { }
+    else{
+      $this->redirect_error ? header("Location: ".$this->redirect_error) : header("Location: /");
+    }
+  }
 }
+
 ?>
 ```
 
-##Como usar
+## Como usar
 
-Para usar, basta chamar a função do script passando o token RD Station da sua conta, o identificador da fonte/evento (ex: pagina-contato), e um array com as informações do formulário.
+Dentro do arquivo que recebe os dados do seu formulário, importe o arquivo `RD_Station.php` que você criou. Em seguida importe a classe `RD_Station`, passando os dados recebidos no seu formulário como parâmetro para ela. Supondo que você esteja recebendo os dados do formulário na variável `$_POST`, seu código ficaria assim:  
 
 ```PHP
 <?php
 
-/* ou use os parâmetros do POST */
-$form_data_array = $_POST;
-/* ou crie o seu próprio array de informações */
-$form_data_array = array('email'=>'teste@rdstation.com.br', 'nome'=>'Fulano', 'empresa'=>'RD Station', 'cargo'=>'Robo');
+// Importando o arquivo com a classe RD_Station
+require_once("RD_Station.php");
 
-addLeadConversionToRdstationCrm("SEU_TOKEN_RDSTATION_AQUI", "teste-php", $form_data_array);
+// Instanciando a classe RD_Station
+$rdstation = new RD_Station($_POST);
+
 ?>
 ```
 
+Pode ser que você esteja recebendo os dados de outra forma ao invés da variável **$_POST**. Sem problemas, desde que seja um **array**.  
+
+Agora você precisa passar alguns parâmetros obrigatórios para a integração funcionar corretamente.
+
+### Token RD Station
+
+Um desses parâmetros **obrigatórios** é o seu **token público** do RD Station:
+```PHP
+<?php
+
+// Importando o arquivo com a classe RD_Station
+require_once("RD_Station.php");
+
+// Instanciando a classe RD_Station
+$rdstation = new RD_Station($_POST);
+
+// Passando o meu token RD Station
+$rdstation->token = 'INSIRA SEU TOKEN AQUI';
+
+?>
+```
+
+### Identificador do formulário
+
+Você também precisa passar um identificador para este formulário, dessa forma você sempre saberá o formulário de origem do lead:  
+```PHP
+<?php
+
+// Importando o arquivo com a classe RD_Station
+require_once("RD_Station.php");
+
+// Instanciando a classe RD_Station
+$rdstation = new RD_Station($_POST);
+
+// Token público do RD Station
+$rdstation->token = 'INSIRA SEU TOKEN AQUI';
+
+// Identificador do formulário
+$rdstation->token = 'INSIRA SEU IDENTIFICADOR AQUI';
+
+?>
+```
+
+### Ignorar campos do formulário
+
+Não é recomendável enviar senhas ou captcha para o seu RD Station, por exemplo. Para evitar que esses campos sejam enviados, basta você informar à classe que eles devem ser ignorados. Insira o `name` desses campos em um array, como no exemplo abaixo:
+
+```PHP
+<?php
+
+// Importando o arquivo com a classe RD_Station
+require_once("RD_Station.php");
+
+// Instanciando a classe RD_Station
+$rdstation = new RD_Station($_POST);
+
+// Token público do RD Station
+$rdstation->token = 'INSIRA SEU TOKEN AQUI';
+
+// Identificador do formulário
+$rdstation->identifier = 'INSIRA SEU IDENTIFICADOR AQUI';
+
+// Ignorando campos desnecessários
+$rdstation->ignore_fields = ['campo1', 'campo2', 'campo3'];
+
+?>
+```
+
+### Redirecionamentos
+
+Seu formulário em PHP deve possuir algum lugar para onde ele redireciona o usuário caso tudo ocorra bem ou caso ocorra algum erro. Passe estes redirecionamentos para a instância do RD Station
+
+```PHP
+<?php
+
+// Importando o arquivo com a classe RD_Station
+require_once("RD_Station.php");
+
+// Instanciando a classe RD_Station
+$rdstation = new RD_Station($_POST);
+
+// Token público do RD Station
+$rdstation->token = 'INSIRA SEU TOKEN AQUI';
+
+// Identificador do formulário
+$rdstation->identifier = 'INSIRA SEU IDENTIFICADOR AQUI';
+
+// Ignorando campos desnecessários
+$rdstation->ignore_fields = ['campo1', 'campo2', 'campo3'];
+
+// Redirecionamento caso tudo esteja ok
+$rdstation->redirect_success = 'http://linkdesejadoaqui.com.br';
+
+// Redirecionamento caso ocorram erros
+$rdstation->redirect_error = 'http://linkdesejadoaqui.com.br';
+
+?>
+```
+### Criando o lead
+
+A última coisa que você precisa fazer, é chamar a função que cria o lead. Se você passou todos os parâmetros corretamente, os leads irão aparecer no seu RD Station quando o seu formulário for enviado:  
+
+```PHP
+<?php
+
+// Importando o arquivo com a classe RD_Station
+require_once("RD_Station.php");
+
+// Instanciando a classe RD_Station
+$rdstation = new RD_Station($_POST);
+
+// Token público do RD Station
+$rdstation->token = 'INSIRA SEU TOKEN AQUI';
+
+// Identificador do formulário
+$rdstation->identifier = 'INSIRA SEU IDENTIFICADOR AQUI';
+
+// Ignorando campos desnecessários
+$rdstation->ignore_fields = ['campo1', 'campo2', 'campo3'];
+
+// Redirecionamento caso tudo esteja ok
+$rdstation->redirect_success = 'http://linkdesejadoaqui.com.br';
+
+// Redirecionamento caso ocorram erros
+$rdstation->redirect_error = 'http://linkdesejadoaqui.com.br';
+
+// Criando os leads
+$rdstation->createLead();
+
+?>
+```
 
 ##Campos e informações do formulário
 
@@ -108,119 +269,3 @@ A API pode retornar erro caso:
     <li>(400) não esteja recebendo um identificador;</li>
     <li>(400) não esteja recebendo a informação **email** ou **email_lead** do formulário;</li>
 </ul>
-
-
-#Exemplos completos
-
-Na código HTML+PHP abaixo, é possível ver uma página com formulário que submete para ela mesmo e que utiliza o script de integração para capturar os dados do formulário e enviar para o RD Station.
-rdstation-exemplo-integracao-php.php
-
-```PHP
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>PHP | Integrações RD Station</title>
-
-<?php
-if ($_SERVER['REQUEST_METHOD']=='POST') {
-  /**
-   * RD Station - Integrações
-   * addLeadConversionToRdstationCrm()
-   * Envio de dados para a API de leads do RD Station
-   *
-   * Parâmetros:
-   *     ($rdstation_token) - token da sua conta RD Station ( encontrado em https://www.rdstation.com.br/docs/api )
-   *     ($identifier) - identificador da página ou evento ( por exemplo, 'pagina-contato' )
-   *     ($data_array) - um Array com campos do formulário ( por exemplo, array('email' => 'teste@rdstation.com.br', 'nome' =>'Fulano') )
-   */
-  function addLeadConversionToRdstationCrm( $rdstation_token, $identifier, $data_array ) {
-    $api_url = "http://www.rdstation.com.br/api/1.2/conversions";
-
-    try {
-      if (empty($data_array["token_rdstation"]) && !empty($rdstation_token)) { $data_array["token_rdstation"] = $rdstation_token; }
-      if (empty($data_array["identificador"]) && !empty($identifier)) { $data_array["identificador"] = $identifier; }
-      if (empty($data_array["c_utmz"])) { $data_array["c_utmz"] = $_COOKIE["__utmz"]; }
-      if (empty($data_array["client_id"]) && !empty($_COOKIE["rdtrk"])) { $data_array["client_id"] = json_decode($_COOKIE["rdtrk"])->{'id'};}
-      unset($data_array["password"], $data_array["password_confirmation"], $data_array["senha"],
-            $data_array["confirme_senha"], $data_array["captcha"], $data_array["_wpcf7"],
-            $data_array["_wpcf7_version"], $data_array["_wpcf7_unit_tag"], $data_array["_wpnonce"],
-            $data_array["_wpcf7_is_ajax_call"]);
-
-      if ( !empty($data_array["token_rdstation"]) && !( empty($data_array["email"]) && empty($data_array["email_lead"]) ) ) {
-        $data_query = http_build_query($data_array);
-        if (in_array ('curl', get_loaded_extensions())) {
-          $ch = curl_init($api_url);
-          curl_setopt($ch, CURLOPT_POST, 1);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, $data_query);
-          curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-          curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-          curl_exec($ch);
-          curl_close($ch);
-        } else {
-          $params = array('http' => array('method' => 'POST', 'content' => $data_query, 'ignore_errors' => true));
-          $ctx = stream_context_create($params);
-          $fp = @fopen($api_url, 'rb', false, $ctx);
-        }
-      }
-    } catch (Exception $e) { }
-  }
-
-  $form_data = $_POST;
-  addLeadConversionToRdstationCrm("f1c940384a971f2982c61a5e5f11e6b9", "teste-php", $form_data);
-  /**
-   * Atenção!
-   * Token de testes - Usar o próprio de sua conta encontrado em: https://www.rdstation.com.br/docs/api
-  */
-}
-?>
-
-<style type="text/css">
-html,body{text-align:center;}
-#wrapper{width:600px; margin:0 auto; text-align:center;}
-#conversion-form{width:300px; margin:0 auto; border:1px solid silver;text-align:left;}
-#conversion-form .field{padding:4px;}
-#conversion-form .actions{text-align:center;}
-#conversion-form label{display:block;}
-#conversion-form input[type=text]{width:90%;}
-</style>
-</head>
-<body>
-<div id="wrapper">
-
-  <h1>Integrações RD Station</h1>
-  <h2>Exemplo para PHP</h2>
-
-<?php if ($_SERVER['REQUEST_METHOD']=='GET') { ?>
-  <form id="conversion-form" action="rdstation-exemplo-integracao-php.php" method="POST">
-    <div class="field">
-      <label>E-mail:*</label>
-      <input type="text" name="email" class="required email" />
-    </div>
-    <div class="field">
-      <label>Nome:*</label>
-      <input type="text" name="nome" class="required" />
-    </div>
-    <div class="field">
-      <label>Empresa:</label>
-      <input type="text" name="empresa" class="" />
-    </div>
-    <div class="actions">
-      <input type="submit" value="Enviar" />
-    </div>
-  </form>
-<?php } else { ?>
-  <p>Obrigado por entrar em contato!</p>
-<?php } ?>
-
-  <div>
-    <p>
-      http://www.rdstation.com.br<br/>
-      suporte @ rdstation . com . br
-    </p>
-  </div>
-</div>
-
-</body>
-</html>
-```
