@@ -5,7 +5,6 @@ class RD_Station{
   public $form_data;
   public $token;
   public $identifier;
-  public $ignore_fields = [];
   public $redirect_success = null;
   public $redirect_error = null;
 
@@ -23,7 +22,7 @@ class RD_Station{
     }
   }
 
-  public function canSaveLead($data){
+  private function canSaveLead($data){
     $required_fields = ['email', 'token_rdstation', 'identificador'];
     foreach ($required_fields as $field) {
       if(empty($data[$field]) || is_null($data[$field])){
@@ -34,14 +33,15 @@ class RD_Station{
   }
 
   function createLead() {
+
     $data_array = $this->form_data;
     $data_array['token_rdstation'] = $this->token;
     $data_array['identificador'] = $this->identifier;
-    
+
     if(empty($data_array["c_utmz"])){
       $data_array["c_utmz"] = $_COOKIE["__utmz"];
     }
-    
+
     if(empty($data_array["client_id"]) && !empty($_COOKIE["rdtrk"])) {
       $data_array["client_id"] = json_decode($_COOKIE["rdtrk"])->{'id'};
     }
@@ -50,16 +50,25 @@ class RD_Station{
 
     if($this->canSaveLead($data_array)){
       if (in_array ('curl', get_loaded_extensions())) {
+
+        $data_json = json_encode($data_array);
+        $header = [
+          'Content-Type: application/json',
+          'Content-Length: ' . strlen($data_json)
+        ];
+
         $ch = curl_init($this->api_url);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_query);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_exec($ch);
         curl_close($ch);
       }
       else {
-        $params = [ 'http' => [ 'method' => 'POST', 'content' => $data_query, 'ignore_errors' => true ] ]; 
+        $params = [ 'http' => [ 'method' => 'POST', 'content' => $data_query, 'ignore_errors' => true ] ];
         $ctx = stream_context_create($params);
         $fp = @fopen($api_url, 'rb', false, $ctx);
       }
