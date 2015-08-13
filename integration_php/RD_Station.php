@@ -29,7 +29,7 @@ class RD_Station{
         return false;
       }
     }
-    return true;
+    return strlen($data['token_rdstation']) == 32 ? true : false;
   }
 
   function createLead() {
