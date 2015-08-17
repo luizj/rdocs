@@ -44,7 +44,7 @@ Caso deseje gerar o script manualmente, os seguintes passos podem ser executados
 3 - Adicionar o código na página que contém o formulário.
 
 ```HTML
-<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.4.0/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/stable/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
     RdIntegration.integrate('SEU_TOKEN_RDSTATION_AQUI', 'IDENTIFICADOR DESEJADO');
 </script>
@@ -75,7 +75,7 @@ Assim, para integrar seu formulário, siga os passos 1 e 2 normalmente, e no pas
 O seu código deverá ser algo como:
 
 ```HTML
-<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.3.0/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/stable/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
     var meus_campos = {
       "email_do_usuario": "email",
@@ -168,7 +168,7 @@ html,body{text-align:center;}
   </form> 
 </div>
 <!-- Início do código de integração -->
-<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/0.3.0/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/stable/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
     RdIntegration.integrate('f1c940384a971f2982c61a5e5f11e6b9', 'Formulário de contato');
 </script>
