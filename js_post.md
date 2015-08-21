@@ -1,6 +1,6 @@
 ## Fazendo um POST para a API do RD Station
 
-O RD Station disponibiliza um serviço de integração via API muito fácil de ser integrado com seu formulário. Se você deseja gerar uma um novo Lead ou uma nova conversão em um Lead já existente, para você usar nosso serviço basta você carregar nosso _script_ na sua página e usar a função `post` disponível do serviço.
+O RD Station disponibiliza um serviço via API que você pode usar para integrar o formulário do seu site. Se você deseja gerar um novo Lead ou uma nova conversão em um Lead já existente, para você usar nosso serviço basta você carregar nosso _script_ na sua página e usar a função `post` disponível do serviço.
 
 Primeiramente, antes de tudo, você deve carregar o _script_ em sua página. A partir do momento que você fizer isso, você será capaz de usar a função que fará a integração. Para carregar o _script_ na sua página, basta colar este código logo antes de fechar a tag `</body>` do seu html:
 
