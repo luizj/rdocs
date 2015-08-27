@@ -3,7 +3,7 @@
 ## PHP
 
 Muitos sites em PHP possuem uma página que é um script para enviar o email de contato ou tratar o preenchimento de algum formulário.
-Para fazer com que essa página envie os dados para o CRM do RD Station, você deve inserir essa classe no seu código, e passar para ela os parâmetros necessários.
+Para fazer com que essa página envie os dados para o RD Station, você deve inserir essa classe no seu código, e passar para ela os parâmetros necessários.
 
 ## Classe para integração
 
@@ -16,11 +16,11 @@ class RD_Station{
   public $form_data;
   public $token;
   public $identifier;
-  public $ignore_fields = [];
+  public $ignore_fields = array();
   public $redirect_success = null;
   public $redirect_error = null;
 
-  private $api_url = "http://www.rdstation.com.br/api/1.2/conversions";
+  private $api_url = "https://www.rdstation.com.br/api/1.2/conversions";
 
   public function __construct($form_data){
     $this->form_data = $form_data;
@@ -35,7 +35,7 @@ class RD_Station{
   }
 
   public function canSaveLead($data){
-    $required_fields = ['email', 'token_rdstation', 'identificador'];
+    $required_fields = array('email', 'token_rdstation');
     foreach ($required_fields as $field) {
       if(empty($data[$field]) || is_null($data[$field])){
         return false;
@@ -70,7 +70,7 @@ class RD_Station{
         curl_close($ch);
       }
       else {
-        $params = [ 'http' => [ 'method' => 'POST', 'content' => $data_query, 'ignore_errors' => true ] ]; 
+        $params = array( 'http' => array( 'method' => 'POST', 'content' => $data_query ) ); 
         $ctx = stream_context_create($params);
         $fp = @fopen($api_url, 'rb', false, $ctx);
       }
@@ -139,7 +139,7 @@ $rdstation = new RD_Station($_POST);
 $rdstation->token = 'INSIRA SEU TOKEN AQUI';
 
 // Identificador do formulário
-$rdstation->token = 'INSIRA SEU IDENTIFICADOR AQUI';
+$rdstation->identifier = 'INSIRA SEU IDENTIFICADOR AQUI';
 
 ?>
 ```
@@ -164,7 +164,7 @@ $rdstation->token = 'INSIRA SEU TOKEN AQUI';
 $rdstation->identifier = 'INSIRA SEU IDENTIFICADOR AQUI';
 
 // Ignorando campos desnecessários
-$rdstation->ignore_fields = ['campo1', 'campo2', 'campo3'];
+$rdstation->ignore_fields = array('campo1', 'campo2', 'campo3');
 
 ?>
 ```
@@ -189,7 +189,7 @@ $rdstation->token = 'INSIRA SEU TOKEN AQUI';
 $rdstation->identifier = 'INSIRA SEU IDENTIFICADOR AQUI';
 
 // Ignorando campos desnecessários
-$rdstation->ignore_fields = ['campo1', 'campo2', 'campo3'];
+$rdstation->ignore_fields = array('campo1', 'campo2', 'campo3');
 
 // Redirecionamento caso tudo esteja ok
 $rdstation->redirect_success = 'http://linkdesejadoaqui.com.br';
@@ -219,7 +219,7 @@ $rdstation->token = 'INSIRA SEU TOKEN AQUI';
 $rdstation->identifier = 'INSIRA SEU IDENTIFICADOR AQUI';
 
 // Ignorando campos desnecessários
-$rdstation->ignore_fields = ['campo1', 'campo2', 'campo3'];
+$rdstation->ignore_fields = array('campo1', 'campo2', 'campo3');
 
 // Redirecionamento caso tudo esteja ok
 $rdstation->redirect_success = 'http://linkdesejadoaqui.com.br';
@@ -237,7 +237,7 @@ $rdstation->createLead();
 
 Dos dados do usuário, a informação de **email** ou **email_lead** é sempre **obrigatória**. Se não estiver presente, um erro retornará.
 
-Diversos outros campos podem ser utilizados para um chaveamento automática com a ferramenta inteligente de CRM. Segue uma lista:
+Diversos outros campos podem ser utilizados para um chaveamento automático com o RD Station. Segue uma lista:
 
 <ul>
 <li>nome</li>
@@ -247,13 +247,7 @@ Diversos outros campos podem ser utilizados para um chaveamento automática com 
 <li>twitter</li>
 </ul>
 
-Se quiser retirar algum campo para não enviar ao RD Station, pode modificar o array de dados:
 
-```PHP
-<?php
-$form_data_array = $_POST; /* suponha que exista um campo "senha" no seu formulário */
-unset($form_data_array["senha"]);
-?>
 ```
 
 ##Avisos de conversão por email
