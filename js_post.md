@@ -5,12 +5,12 @@ O RD Station disponibiliza um serviço via API que você pode usar para integrar
 Primeiramente, antes de tudo, você deve carregar o _script_ em sua página. A partir do momento que você fizer isso, você será capaz de usar a função que fará a integração. Para carregar o _script_ na sua página, basta colar este código logo antes de fechar a tag `</body>` do seu html:
 
 ```html
-<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/latest/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/stable/rd-js-integration.min.js"></script>
 ```
 
 Pronto, agora você poderá acessar a varíavel `RDIntegration` que será responsável por comunicar com a nossa API e integrar seu formulário.
 
-Após você ter o _script_ de integração já carregado no seu site, você pode usar a função `post`, ela que irá enviar os dados do seu formulário para nossa API, porém para isso você precisa ter uma estrutura de dados correta. Esta estrutura de dados deverá ser um array com os dados a serem enviados para o RD Station. 
+Após você ter o _script_ de integração já carregado no seu site, você pode usar a função `post`, ela que irá enviar os dados do seu formulário para nossa API, porém para isso você precisa ter uma estrutura de dados correta. Esta estrutura de dados deverá ser um array com os dados a serem enviados para o RD Station.
 Alguns dados são obrigatórios, sendo eles:
 - email
 - token_rdstation
@@ -28,10 +28,10 @@ Para capturar os dados do seu formulário é muito fácil, basta você seleciona
 <form id="conversion-form" method="post" action="/">
   <label for="email">Email</label>
   <input name="email" type="email" />
-  
+
   <label form="nome">Nome</label>
   <input name="name" type="text" />
-  
+
   <input type="submit" id="submit-button" value="Enviar" />
 </form>
 ```
@@ -42,7 +42,7 @@ Recomendamos fortemente que você use a biblioteca [jQuery](https://jquery.com/)
 
 ```html
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/latest/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/stable/rd-js-integration.min.js"></script>
 ```
 
 Agora veja um exemplo de como manipular os campos do seu formulário:
@@ -65,15 +65,15 @@ var form = $('#conversion-form');
 var inputNome = form.find('input[name="nome"]');
 var inputEmail = form.find('input[name="email"]');
 
-form.on('submit', function(event) {
+form.on('submit', function(ev) {
   var data_array = [
     { name: 'email', value: inputEmail.val() },
+    { name: 'identificador', value: 'Formulario de contato' },
     { name: 'nome', value: inputNome.val() },
     { name: 'token_rdstation', value: TOKEN }
   ];
-  
+
   RdIntegration.post(data_array);
-  event.preventDefault();
 });
 </script>
 ```
@@ -89,12 +89,11 @@ Você pode ainda capturar todos os campos de um formulário automaticamente usan
 ```html
 <script type="text/javascript">
   var form = $('#conversion-form');
-  
+
   form.on('submit', function(ev) {
     var inputs = form.find(':input');
-    
+
     RdIntegration.post(inputs.serializeArray());
-    event.preventDefault();
   });
 </script>
 ```
@@ -114,27 +113,26 @@ Veja como ficou o exemplo completo:
   <form id="conversion-form" method="post" action="/">
     <input type="hidden" id="token_rdstation" name="token_rdstation" value="SEU_TOKEN_RDSTATION">
     <input type="hidden" id="token_rdstation" name="identificador" value="IDENTIFICADOR_DESEJADO">
-    
+
     <label for="email">Email</label>
     <input name="email" type="email" />
-    
+
     <label form="nome">Nome</label>
     <input name="name" type="text" />
-    
+
     <input type="submit" id="submit-button" value="Enviar" />
   </form>
-  
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/latest/rd-js-integration.min.js"></script>
-  
+  <script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/stable/rd-js-integration.min.js"></script>
+
   <script type="text/javascript">
     var form = $('#conversion-form');
-    
+
     form.on('submit', function(ev) {
       var inputs = form.find(':input');
-      
+
       RdIntegration.post(inputs.serializeArray());
-      event.preventDefault();
     });
   </script>
 </body>
@@ -145,14 +143,15 @@ Veja como ficou o exemplo completo:
 Você pode inserir a função `post`, por exemplo, ao submeter um formulário. Para evitar que você perca a função que executava antes da integração, você pode inseri-la como um função nos parâmetros no post. Por exemplo:
 
 ```html
-<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/latest/rd-js-integration.min.js"></script>
+<script type ='text/javascript' src="https://d335luupugsy2.cloudfront.net/js/integration/stable/rd-js-integration.min.js"></script>
 <script type ='text/javascript'>
   var data_array = [
-    {name: 'email', value: 'integracao@test.com'},
-    {name: 'identificador', value: 'Formulario de contato'},
-    {name: 'token_rdstation', value: 'f1c940384a971f2982c61a5e5f11e6b9'},
-    {name: 'nome', value: 'Fulano'}
+    { name: 'email', value: 'integracao@test.com' },
+    { name: 'identificador', value: 'Formulario de contato' },
+    { name: 'token_rdstation', value: 'f1c940384a971f2982c61a5e5f11e6b9' },
+    { name: 'nome', value: 'Fulano' }
   ];
+
   RdIntegration.post(data_array, function () { alert('callback'); });
 </script>
 ```
