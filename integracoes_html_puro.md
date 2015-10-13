@@ -50,8 +50,9 @@ Com o Google Analytics, é possível descobrir a fonte da origem de seu visitant
 
 ```HTML
 <input type="hidden" name="c_utmz" id="c_utmz" value="" />
+<input type="hidden" name="traffic_source" id="traffic_source" value="" />
 <script type="text/javascript">
-function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0;d<c.length;d++){var e=c[d];while(e.charAt(0)==" ")e=e.substring(1,e.length);if(e.indexOf(b)==0){return e.substring(b.length,e.length)}}return null}try{document.getElementById("c_utmz").value=read_cookie("__utmz")}catch(err){}
+function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0;d<c.length;d++){var e=c[d];while(e.charAt(0)==" ")e=e.substring(1,e.length);if(e.indexOf(b)==0){return e.substring(b.length,e.length)}}return null}try{document.getElementById("c_utmz").value=read_cookie("__utmz"); document.getElementById("traffic_source").value=read_cookie("__trf.src");}catch(err){}
 </script>
 ```
 
@@ -90,7 +91,7 @@ Na código HTML abaixo, é possível ver uma página com um formulário simples 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>HTML Puro | IntegraÃ§Ãµes RD Station</title>
+<title>HTML Puro | Integrações RD Station</title>
 <style type="text/css">
 html,body{text-align:center;}
 #wrapper{width:600px; margin:0 auto; text-align:center;}
@@ -104,14 +105,14 @@ html,body{text-align:center;}
 <body>
 <div id="wrapper">
 
-  <h1>IntegraÃ§Ãµes RD Station</h1>
+  <h1>Integrações RD Station</h1>
   <h2>HTML Puro</h2>
 
   <form action="https://www.rdstation.com.br/api/1.2/conversions" method="POST">
     <input type="hidden" name="token_rdstation" value="f1c940384a971f2982c61a5e5f11e6b9" />
     <!--
-      * AtenÃ§Ã£o!
-      * Token de testes - Usar o prÃ³prio de sua conta encontrado em: https://www.rdstation.com.br/docs/api
+      * Atenção!
+      * Token de testes - Usar o próprio de sua conta encontrado em: https://www.rdstation.com.br/docs/api
     -->
     <input type="hidden" name="identificador" value="teste-html-puro" />
     <input type="hidden" name="redirect_to" value="http://resultadosdigitais.com.br" />
@@ -130,8 +131,9 @@ html,body{text-align:center;}
     </div>
     <div class="actions">
 <input type="hidden" name="c_utmz" id="c_utmz" value="" />
+<input type="hidden" name="traffic_source" id="traffic_source" value="" />
 <script type="text/javascript">
-function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0;d<c.length;d++){var e=c[d];while(e.charAt(0)==" ")e=e.substring(1,e.length);if(e.indexOf(b)==0){return e.substring(b.length,e.length)}}return null}try{document.getElementById("c_utmz").value=read_cookie("__utmz")}catch(err){}
+function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0;d<c.length;d++){var e=c[d];while(e.charAt(0)==" ")e=e.substring(1,e.length);if(e.indexOf(b)==0){return e.substring(b.length,e.length)}}return null}try{document.getElementById("c_utmz").value=read_cookie("__utmz"); document.getElementById("traffic_source").value=read_cookie("__trf.src");}catch(err){}
 </script>
       <input type="submit" value="Enviar" />
     </div>
@@ -141,5 +143,6 @@ function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0
 
 </body>
 </html>
+
 ```
 
