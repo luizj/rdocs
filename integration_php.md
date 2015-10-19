@@ -54,7 +54,7 @@ class RD_Station{
     }
     
     if(empty($data_array["traffic_source"])){
-      $data_array["traffic_source"] = $_COOKIE["__trf.src"];
+      $data_array["traffic_source"] = $_COOKIE["__trf_src"];
     }
     
     if(empty($data_array["client_id"]) && !empty($_COOKIE["rdtrk"])) {
