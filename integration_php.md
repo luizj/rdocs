@@ -20,7 +20,7 @@ class RD_Station{
   public $redirect_success = null;
   public $redirect_error = null;
 
-  private $api_url = "https://www.rdstation.com.br/api/1.2/conversions";
+  private $api_url = "https://www.rdstation.com.br/api/1.3/conversions";
 
   public function __construct($form_data){
     $this->form_data = $form_data;
@@ -48,15 +48,15 @@ class RD_Station{
     $data_array = $this->form_data;
     $data_array['token_rdstation'] = $this->token;
     $data_array['identificador'] = $this->identifier;
-    
+
     if(empty($data_array["c_utmz"])){
       $data_array["c_utmz"] = $_COOKIE["__utmz"];
     }
-    
+
     if(empty($data_array["traffic_source"])){
       $data_array["traffic_source"] = $_COOKIE["__trf_src"];
     }
-    
+
     if(empty($data_array["client_id"]) && !empty($_COOKIE["rdtrk"])) {
       $data_array["client_id"] = json_decode($_COOKIE["rdtrk"])->{'id'};
     }
@@ -74,7 +74,7 @@ class RD_Station{
         curl_close($ch);
       }
       else {
-        $params = array( 'http' => array( 'method' => 'POST', 'content' => $data_query ) ); 
+        $params = array( 'http' => array( 'method' => 'POST', 'content' => $data_query ) );
         $ctx = stream_context_create($params);
         $fp = @fopen($api_url, 'rb', false, $ctx);
       }
@@ -91,7 +91,7 @@ class RD_Station{
 
 ## Como usar
 
-Dentro do arquivo que recebe os dados do seu formulário, importe o arquivo `RD_Station.php` que você criou. Em seguida importe a classe `RD_Station`, passando os dados recebidos no seu formulário como parâmetro para ela. Supondo que você esteja recebendo os dados do formulário na variável `$_POST`, seu código ficaria assim:  
+Dentro do arquivo que recebe os dados do seu formulário, importe o arquivo `RD_Station.php` que você criou. Em seguida importe a classe `RD_Station`, passando os dados recebidos no seu formulário como parâmetro para ela. Supondo que você esteja recebendo os dados do formulário na variável `$_POST`, seu código ficaria assim:
 
 ```PHP
 <?php
@@ -105,7 +105,7 @@ $rdstation = new RD_Station($_POST);
 ?>
 ```
 
-Pode ser que você esteja recebendo os dados de outra forma ao invés da variável **$_POST**. Sem problemas, desde que seja um **array**.  
+Pode ser que você esteja recebendo os dados de outra forma ao invés da variável **$_POST**. Sem problemas, desde que seja um **array**.
 
 Agora você precisa passar alguns parâmetros obrigatórios para a integração funcionar corretamente.
 
@@ -129,7 +129,7 @@ $rdstation->token = 'INSIRA SEU TOKEN AQUI';
 
 ### Identificador do formulário
 
-Você também precisa passar um identificador para este formulário, dessa forma você sempre saberá o formulário de origem do lead:  
+Você também precisa passar um identificador para este formulário, dessa forma você sempre saberá o formulário de origem do lead:
 ```PHP
 <?php
 
@@ -205,7 +205,7 @@ $rdstation->redirect_error = 'http://linkdesejadoaqui.com.br';
 ```
 ### Criando o lead
 
-A última coisa que você precisa fazer, é chamar a função que cria o lead. Se você passou todos os parâmetros corretamente, os leads irão aparecer no seu RD Station quando o seu formulário for enviado:  
+A última coisa que você precisa fazer, é chamar a função que cria o lead. Se você passou todos os parâmetros corretamente, os leads irão aparecer no seu RD Station quando o seu formulário for enviado:
 
 ```PHP
 <?php
