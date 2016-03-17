@@ -29,7 +29,7 @@ Quatro coisas são necessárias editar/adicionar na sua página para a integraç
  <b>4.</b> Fazer o formulário postar as informações para a API
 
 ```HTML
-      <form action="https://www.rdstation.com.br/api/1.2/conversions" method="POST">
+      <form action="https://www.rdstation.com.br/api/1.3/conversions" method="POST">
 ```
 
 Após isso, sua página já está integrada com o RD Station.
@@ -53,6 +53,21 @@ Com o Google Analytics, é possível descobrir a fonte da origem de seu visitant
 <input type="hidden" name="traffic_source" id="traffic_source" value="" />
 <script type="text/javascript">
 function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0;d<c.length;d++){var e=c[d];while(e.charAt(0)==" ")e=e.substring(1,e.length);if(e.indexOf(b)==0){return e.substring(b.length,e.length)}}return null}try{document.getElementById("c_utmz").value=read_cookie("__utmz"); document.getElementById("traffic_source").value=read_cookie("__trf.src");}catch(err){}
+</script>
+```
+
+### Recebendo visitas do Lead Tracking
+
+Além do reconhecimento da origem do Lead, também é possível fazer o monitoramento da navegação do Lead em seu site, utilizando o Lead Tracking.
+
+Para isso, é preciso adicionar dentro da tag `<head>` do seu site o código de monitoramento, que pode ser obtido conforme a [central de ajuda](http://ajuda.rdstation.com.br/hc/pt-br/articles/205133846-Como-instalar-o-C%C3%B3digo-de-Monitoramento-do-RD-Station-em-meu-site-).
+
+Depois de adicionado o código de monitoramento, é preciso adicionar um novo campo no HTML com *name* e *id* de **client_id** e também adicionar um trecho de código javascript, ao código já existente.
+
+```HTML
+<input type="hidden" name="client_id" id="client_id" value="" />
+<script type="text/javascript">
+function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0;d<c.length;d++){var e=c[d];while(e.charAt(0)==" ")e=e.substring(1,e.length);if(e.indexOf(b)==0){return e.substring(b.length,e.length)}}return null}try{document.getElementById("c_utmz").value=read_cookie("__utmz");document.getElementById("traffic_source").value=read_cookie("__trf.src");document.getElementById("client_id").value=JSON.parse(decodeURIComponent(read_cookie("rdtrk"))).id}catch(err){}
 </script>
 ```
 
@@ -101,6 +116,7 @@ html,body{text-align:center;}
 #conversion-form label{display:block;}
 #conversion-form input[type=text]{width:90%;}
 </style>
+<script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/ABC123-loader.js" ></script>
 </head>
 <body>
 <div id="wrapper">
@@ -108,7 +124,7 @@ html,body{text-align:center;}
   <h1>Integrações RD Station</h1>
   <h2>HTML Puro</h2>
 
-  <form action="https://www.rdstation.com.br/api/1.2/conversions" method="POST">
+  <form action="https://www.rdstation.com.br/api/1.3/conversions" method="POST">
     <input type="hidden" name="token_rdstation" value="f1c940384a971f2982c61a5e5f11e6b9" />
     <!--
       * Atenção!
@@ -116,6 +132,7 @@ html,body{text-align:center;}
     -->
     <input type="hidden" name="identificador" value="teste-html-puro" />
     <input type="hidden" name="redirect_to" value="http://resultadosdigitais.com.br" />
+    <input type="hidden" name="client_id" id="client_id" value="" />
 
     <div class="field">
       <label>E-mail:*</label>
@@ -133,7 +150,7 @@ html,body{text-align:center;}
 <input type="hidden" name="c_utmz" id="c_utmz" value="" />
 <input type="hidden" name="traffic_source" id="traffic_source" value="" />
 <script type="text/javascript">
-function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0;d<c.length;d++){var e=c[d];while(e.charAt(0)==" ")e=e.substring(1,e.length);if(e.indexOf(b)==0){return e.substring(b.length,e.length)}}return null}try{document.getElementById("c_utmz").value=read_cookie("__utmz"); document.getElementById("traffic_source").value=read_cookie("__trf.src");}catch(err){}
+function read_cookie(a){var b=a+"=";var c=document.cookie.split(";");for(var d=0;d<c.length;d++){var e=c[d];while(e.charAt(0)==" ")e=e.substring(1,e.length);if(e.indexOf(b)==0){return e.substring(b.length,e.length)}}return null}try{document.getElementById("c_utmz").value=read_cookie("__utmz"); document.getElementById("traffic_source").value=read_cookie("__trf.src");document.getElementById("client_id").value=JSON.parse(decodeURIComponent(read_cookie("rdtrk"))).id}catch(err){}
 </script>
       <input type="submit" value="Enviar" />
     </div>
