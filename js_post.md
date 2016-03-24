@@ -102,7 +102,7 @@ Porém, para que seu integração funcione corretamente, você deve colocar o ca
 
 ```html
 <input type="hidden" id="token_rdstation" name="token_rdstation" value="SEU_TOKEN_RDSTATION">
-<input type="hidden" id="token_rdstation" name="identificador" value="IDENTIFICADOR_DESEJADO">
+<input type="hidden" id="identificador" name="identificador" value="IDENTIFICADOR_DESEJADO">
 ```
 
 Veja como ficou o exemplo completo:
@@ -112,7 +112,7 @@ Veja como ficou o exemplo completo:
   <!-- conteúdo da sua página -->
   <form id="conversion-form" method="post" action="/">
     <input type="hidden" id="token_rdstation" name="token_rdstation" value="SEU_TOKEN_RDSTATION">
-    <input type="hidden" id="token_rdstation" name="identificador" value="IDENTIFICADOR_DESEJADO">
+    <input type="hidden" id="identificador" name="identificador" value="IDENTIFICADOR_DESEJADO">
 
     <label for="email">Email</label>
     <input name="email" type="email" />
