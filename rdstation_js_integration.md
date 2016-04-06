@@ -110,7 +110,7 @@ Os campos abaixo irão aparecer diretamente na tela de informação de Lead se m
 
 Todas as informações que você deseja enviar ao RD Station devem estar em um HTML <em>input</em> e obrigatoriamente devem possuir uma tag <strong>name</strong> para identificá-los. Essas informações também ficarão disponíveis nos detalhes da conversão do Lead.
 ```HTML
-<input type="text" name="Telefone" />
+<input type="text" name="telefone" />
 ```
 
 Recomendamos que o campo de nome possua a tag name="name", pois dessa forma, esse será o nome do Lead criado no RD Station. Caso não seja enviada essa informação, o nome do Lead será preenchida com o seu e-mail.
