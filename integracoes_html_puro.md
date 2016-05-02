@@ -29,7 +29,7 @@ Quatro coisas são necessárias editar/adicionar na sua página para a integraç
  <b>4.</b> Fazer o formulário postar as informações para a API
 
 ```HTML
-      <form action="https://www.rdstation.com.br/api/1.3/conversions" method="POST">
+      <form action="https://www.rdstation.com.br/api/1.2/conversions" method="POST">
 ```
 
 Após isso, sua página já está integrada com o RD Station.
