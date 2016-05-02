@@ -124,7 +124,7 @@ html,body{text-align:center;}
   <h1>Integrações RD Station</h1>
   <h2>HTML Puro</h2>
 
-  <form action="https://www.rdstation.com.br/api/1.3/conversions" method="POST">
+  <form action="https://www.rdstation.com.br/api/1.2/conversions" method="POST">
     <input type="hidden" name="token_rdstation" value="f1c940384a971f2982c61a5e5f11e6b9" />
     <!--
       * Atenção!
