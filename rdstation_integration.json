@@ -21,7 +21,14 @@
       },
       "created_at":"2012-06-04T15:31:35-03:00",
       "cumulative_sum":"1",
-      "source":"source 1"
+      "source":"source 1",
+      "conversion_origin": {
+            "source": "source 1",
+            "medium": "medium 1",
+            "value": "value 1",
+            "campaign": "campaign 1",
+            "channel": "channel 1"
+          }
     },
     "last_conversion": {
       "content": {
@@ -38,6 +45,8 @@
     "mobile_phone":"48 30252598",
     "city":"Florianópolis",
     "state": "SC",
+    "lead_stage": "Lead",
+    "tags": ["tag 1", "tag 2"],
     "fit_score":"d",
     "interest":0
   }]
