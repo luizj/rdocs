@@ -29,7 +29,7 @@ Para capturar os dados do seu formulário é muito fácil, basta você seleciona
   <label for="email">Email</label>
   <input name="email" type="email" />
 
-  <label form="nome">Nome</label>
+  <label for="name">Nome</label>
   <input name="name" type="text" />
 
   <input type="submit" id="submit-button" value="Enviar" />
