@@ -53,7 +53,7 @@ class RD_Station{
       $data_array["c_utmz"] = $_COOKIE["__utmz"];
     }
 
-    if(empty($data_array["traffic_source"])){
+    if ( isset($_COOKIE["__trf_src"]) && empty($data_array["traffic_source"]) ) {
       $data_array["traffic_source"] = $_COOKIE["__trf_src"];
     }
 
@@ -168,7 +168,7 @@ $rdstation->token = 'INSIRA SEU TOKEN AQUI';
 $rdstation->identifier = 'INSIRA SEU IDENTIFICADOR AQUI';
 
 // Ignorando campos desnecessários
-$rdstation->ignore_fields = array('campo1', 'campo2', 'campo3');
+$rdstation->ignore_fields(array('campo1', 'campo2', 'campo3'));
 
 ?>
 ```
@@ -193,7 +193,7 @@ $rdstation->token = 'INSIRA SEU TOKEN AQUI';
 $rdstation->identifier = 'INSIRA SEU IDENTIFICADOR AQUI';
 
 // Ignorando campos desnecessários
-$rdstation->ignore_fields = array('campo1', 'campo2', 'campo3');
+$rdstation->ignore_fields(array('campo1', 'campo2', 'campo3'));
 
 // Redirecionamento caso tudo esteja ok
 $rdstation->redirect_success = 'http://linkdesejadoaqui.com.br';
@@ -223,7 +223,7 @@ $rdstation->token = 'INSIRA SEU TOKEN AQUI';
 $rdstation->identifier = 'INSIRA SEU IDENTIFICADOR AQUI';
 
 // Ignorando campos desnecessários
-$rdstation->ignore_fields = array('campo1', 'campo2', 'campo3');
+$rdstation->ignore_fields(array('campo1', 'campo2', 'campo3'));
 
 // Redirecionamento caso tudo esteja ok
 $rdstation->redirect_success = 'http://linkdesejadoaqui.com.br';
