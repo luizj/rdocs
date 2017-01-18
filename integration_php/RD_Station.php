@@ -41,6 +41,10 @@ class RD_Station{
     if(empty($data_array["c_utmz"])){
       $data_array["c_utmz"] = $_COOKIE["__utmz"];
     }
+    
+    if ( isset($_COOKIE["__trf_src"]) && empty($data_array["traffic_source"]) ) {
+      $data_array["traffic_source"] = $_COOKIE["__trf_src"];
+    }
 
     if(empty($data_array["client_id"]) && !empty($_COOKIE["rdtrk"])) {
       $data_array["client_id"] = json_decode($_COOKIE["rdtrk"])->{'id'};
