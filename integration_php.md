@@ -74,7 +74,7 @@ class RD_Station{
         curl_close($ch);
       }
       else {
-        $params = array( 'http' => array( 'method' => 'POST', 'content' => $data_query ) );
+        $params = array('http'=>array('method'=>'POST', 'header'=>'Content-type: application/json', 'content'=>$data_query), 'ssl'=>array('verify_peer'=>false, 'verify_peer_name'=>false));
         $ctx = stream_context_create($params);
         $fp = @fopen($api_url, 'rb', false, $ctx);
       }
